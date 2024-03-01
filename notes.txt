@@ -1,0 +1,41 @@
+Simuler bureau de vote : 
+
+	liste électorale : liste des personnes inscrites, seul elles peuvent voter le jour J (max 1 vote)
+	
+	4 classes à creer : 
+		
+			1. Table de décharge -> 
+			
+			liste qui contient les noms des candidats, ainsi qu'un bulletin blanc pour voter. L'entrant prend au moins 2 bulletin et peut prendre un bulletin blanc. 1 personne max
+			
+			2. Bureau ->
+			
+			Parmis les bulletins choisis dans (1), en garder qu'un seul, et les autres sont jetés à la poubelle. 
+			
+			3. Table de vote ->
+			
+			Place où se trouver le président, chaque bulletin conservé dans (2) est envoyé dans une urne, puis le votant signe dans une liste, on pourra comparer les tailles pour s'assurer qu'il y ait autant de votant que de bulletins dans l'urne. 1 personne max.
+			
+			
+			4. élection( pas obligé d'être une classe ) -> 
+			
+			C'est la liste des candidats ( personne )
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			

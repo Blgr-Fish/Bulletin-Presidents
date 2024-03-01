@@ -3,7 +3,7 @@ CFLAGS=-Wall -std=c++17
 INCLUDES=
 LIBS=
 TARGET=main
-OBJ=main.o Personne.o
+OBJ=main.o Personne.o Bureau.o TableDecharge.o TableVote.o 
 
 all : $(TARGET)
 

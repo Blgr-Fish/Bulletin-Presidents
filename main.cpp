@@ -1,8 +1,3 @@
-/**
- * \file main.cpp
- * \author Laurent Granvilliers
- */
-
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
@@ -19,9 +14,9 @@ int main(void)
 
    // création des personnes
    std::vector<Personne*> vp = {
-      new Personne("A", "bic", 7),
-      new Personne("B", "gad", 9),
-      new Personne("C", "ann", 2),
+      new Personne("ijja", "ziad", 7),
+      new Personne("benmammar", "adel", 9),
+      new Personne("traore", "alfousseny", 2),
       new Personne("D", "pol", 5),
       new Personne("E", "lam", 1),
       new Personne("F", "bul", 10),
@@ -35,6 +30,14 @@ int main(void)
    // TODO
    // Code de simulation dans lequel on manipulera les personnes
    // via des pointeurs sur les éléments du vecteur vp.
+   size_t tMax = 20 ;
+   size_t tDecharge = 3 ;
+   size_t tIsoloir = 6 ;
+   size_t tVote = 4 ;
+   double probaBlanc = 0.35;
+   double probaNul = 0.15 ;
+   size_t nombreIsoloire = 3 ;
+   size_t distanceMaximale = 3 ;
 
    // destruction des personnes
    for (Personne* psn : vp)

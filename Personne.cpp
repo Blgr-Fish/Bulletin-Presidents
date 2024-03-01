@@ -1,43 +1,38 @@
-/**
- * \file Personne.cpp
- * \author Laurent Granvilliers
- */
-
 #include "Personne.hpp"
 
 namespace elections {
 
-int Personne::sid_ = 0;
+int Personne::p_electeurId = 0;
 
-Personne::Personne(const std::string& nom, const std::string& prenom,
-                   int spol)
-      : nom_(nom), prenom_(prenom), id_(sid_++), spol_(spol)
-{}
+   Personne::Personne(const std::string& nom, const std::string& prenom,
+                     int spol)
+         : p_nom(nom), p_prenom(prenom), p_id(p_electeurId++), p_sensibilitePolitique(spol)
+   {}
 
-std::string Personne::nom() const
-{
-   return nom_;
-}
+   std::string Personne::getNom() const
+   {
+      return p_nom;
+   }
 
-std::string Personne::prenom() const
-{
-   return prenom_;
-}
+   std::string Personne::getPrenom() const
+   {
+      return p_prenom;
+   }
 
-int Personne::id() const
-{
-   return id_;
-}
+   int Personne::getId() const
+   {
+      return p_id;
+   }
 
-int Personne::spol() const
-{
-   return spol_;
-}
+   int Personne::getSensiPolitique() const
+   {
+      return p_sensibilitePolitique;
+   }
 
-std::ostream& operator<<(std::ostream& os, const Personne& psn)
-{
-   os << psn.nom() << " " << psn.prenom() << " " << psn.spol();
-   return os;
-}
+   std::ostream& operator<<(std::ostream& os, const Personne& psn)
+   {
+      os << psn.getNom() << " " << psn.getPrenom() << " " << psn.getSensiPolitique();
+      return os;
+   }
 
 } // namespace
