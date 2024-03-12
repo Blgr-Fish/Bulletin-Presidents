@@ -13,7 +13,7 @@ int main(void)
    std::srand(std::time(nullptr));
 
    // création des personnes
-   std::vector<Personne*> vp = {
+   std::vector<Personne*> listeElectorale = {
       new Personne("ijja", "ziad", 7),
       new Personne("benmammar", "adel", 9),
       new Personne("traore", "alfousseny", 2),

@@ -2,7 +2,7 @@
 
 namespace elections {
 
-int Personne::p_electeurId = 0;
+int Personne::p_electeurId = 0; // représente le nombre total d'electeurs, s'incrémente a chaque instanciation
 
    Personne::Personne(const std::string& nom, const std::string& prenom,
                      int spol)

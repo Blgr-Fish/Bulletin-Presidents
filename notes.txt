@@ -20,22 +20,3 @@ Simuler bureau de vote :
 			4. élection( pas obligé d'être une classe ) -> 
 			
 			C'est la liste des candidats ( personne )
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
