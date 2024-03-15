@@ -1,8 +1,10 @@
+#include "Personne.hpp"
+#include "TableDecharge.hpp"
+
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
 #include <vector>
-#include "Personne.hpp"
 
 using namespace std;
 using namespace elections;
@@ -39,8 +41,23 @@ int main(void)
    size_t nombreIsoloire = 3 ;
    size_t distanceMaximale = 3 ;
 
+
+   TableDecharge table(listeElectorale.size());
+
+   table.ajoutCandidatDansListe(*listeElectorale[0]) ;
+   table.ajoutCandidatDansListe(*listeElectorale[1]) ;
+   table.ajoutCandidatDansListe(*listeElectorale[2]) ;
+   table.ajoutCandidatDansListe(*listeElectorale[0]) ;
+   table.supprimeCandidatDansListe(*listeElectorale[0]) ;
+
+   std::cout << table.getTailleListeCandidats() << std::endl ; 
+   std::cout << table.getNombreElecteurs() << std::endl ;
+
+
+   
+
    // destruction des personnes
-   for (Personne* psn : vp)
+   for (Personne* psn : listeElectorale)
    {
       delete psn;
    }

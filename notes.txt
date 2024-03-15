@@ -20,3 +20,7 @@ Simuler bureau de vote :
 			4. élection( pas obligé d'être une classe ) -> 
 			
 			C'est la liste des candidats ( personne )
+
+
+Pour qu'une personne devienne un electeur engagé, il faut qu'il ai pris des bulletins dans la table Décharge, il faudra donc créer
+une fonction qui prends en parametre une Personne ainsi qu'un choix de bulletins, et qui renvois un nouvel objet Electeur 
