@@ -35,6 +35,7 @@ public:
 private: 
     size_t p_nombreElecteurs ;
     std::vector<BulletinsCandiat> p_listeCandidatsDecharge;
+    bool p_estEnUtilisation ; // determinera si un electeur est dans la table de décharge
 
 };
 
