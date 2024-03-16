@@ -7,7 +7,7 @@
 namespace elections {
 
    /**
-   * Une personne est définie par un getNom, un prénom, un identifiant unique
+   * Une personne est définie par un nom, un prénom, un identifiant unique
    * et une sensibilité politique de 1 à 10 (de gauche à droite).
    * 
    * L'identifiant unique est généré automatiquement.
@@ -16,11 +16,13 @@ namespace elections {
    public:
       /**
       * Constructeur.
-      * \param getNom    getNom de la personne
+      * \param getNom    nom de la personne
       * \param getPrenom prénom de la personne
       * \param spol   sensibilité politique (entier entre 1 et 10)
       */
       Personne(const std::string& getNom, const std::string& getPrenom, int spol);
+
+      
 
       /**
       * Accesseur.

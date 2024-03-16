@@ -43,6 +43,7 @@ int main(void)
 
 
    TableDecharge table(listeElectorale.size());
+   table.ajouterBulletinBlanc();
 
    table.ajoutCandidatDansListe(*listeElectorale[0]) ;
    table.ajoutCandidatDansListe(*listeElectorale[1]) ;

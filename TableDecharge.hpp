@@ -28,6 +28,9 @@ public:
     void ajoutCandidatDansListe(Personne candidat);
     void supprimeCandidatDansListe(Personne candidat);
 
+    void ajouterBulletinBlanc() ;
+    
+
 
 private: 
     size_t p_nombreElecteurs ;

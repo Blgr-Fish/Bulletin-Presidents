@@ -31,7 +31,7 @@ public:
 
 
 private:
-    size_t p_tempRestant ;
+    size_t p_tempRestant ; // temps restant pour effectuer l'action ( isoloir, table de décharge, etc)
     std::vector<BulletinsCandiat> p_BulletinsChoisis ;
 
     BulletinsCandiat p_BulletinFinal ;
