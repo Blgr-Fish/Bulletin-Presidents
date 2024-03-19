@@ -20,4 +20,5 @@ struct BulletinsCandiat {
     BulletinsCandiat(std::string nom, int id,size_t nombreDeBulletins) 
         :nomCandidat(nom), idCandidat(id), nombreDeBulletins(nombreDeBulletins) {}
 
+    BulletinsCandiat() : nomCandidat("error"), idCandidat(-1), nombreDeBulletins(-1) {}
 };

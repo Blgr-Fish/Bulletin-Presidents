@@ -6,7 +6,7 @@
 
 #include <iostream>
 #include <string>
-#include <vector>
+#include <list>
 
 using namespace elections;
 
@@ -27,13 +27,17 @@ public:
 
     ElecteurEngage(const Personne& personne);
 
+    int getTempsRestant();
+    void setNouveauTempsRestant(int nouveauTemps);
+    void decrementeTempsRestant();
+
+
   
 
 
 private:
-    size_t p_tempRestant ; // temps restant pour effectuer l'action ( isoloir, table de décharge, etc)
-    std::vector<BulletinsCandiat> p_BulletinsChoisis ;
-
+    int p_tempRestant ; // temps restant pour effectuer l'action ( isoloir, table de décharge, etc)
+    std::list<BulletinsCandiat> p_BulletinsChoisis ;
     BulletinsCandiat p_BulletinFinal ;
 
 };
