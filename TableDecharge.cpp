@@ -11,42 +11,15 @@ size_t TableDecharge::getTailleListeCandidats() const { return p_listeCandidatsD
 size_t TableDecharge::getNombreElecteurs() const { return p_nombreElecteurs ;} 
 
 
-// A MODIFIER SI IL FAUT QUE LA LISTE SOIT TRIEE PAR ORDRE ALPHABETIQUE EN FONCTION DU NOM
-// FAIRE COMME DANS LE TP AVEC CONSIGNES
-void TableDecharge::ajoutCandidatDansListe(Personne candidat) {
-    bool estPresent = false;
-
-    // Vérifie si le candidat est déjà présent dans la liste
-    for (auto it = p_listeCandidatsDecharge.begin(); it != p_listeCandidatsDecharge.end(); ++it) {
-        if (it->idCandidat == candidat.getId()) {
-            estPresent = true;
-            std::cout << "Le candidat est deja present dans la liste de candidats, l'operation n'est pas effectue." << std::endl;
-            break; // On stop le parcours si le candidat a été trouvé
+void TableDecharge::ajouterCandidats(Election election) {
+    if(p_listeCandidatsDecharge.empty()) {
+        for (auto it = election.getListeCandidats().begin(); it != election.getListeCandidats().end(); ++it) {
+            p_listeCandidatsDecharge.push_back(BulletinsCandiat(it, getNombreElecteurs()));
+            std::cout << "Le candidat : " << it->getPrenom() << " " << it->getNom() << ", avec une sensibilite politique de " << it->getSensiPolitique() << " a ete ajoute a la liste de candidats." << std::endl ;
         }
-    }
-
-    if (!estPresent && getNombreElecteurs() > 0) {
-        p_listeCandidatsDecharge.push_back(BulletinsCandiat(candidat, getNombreElecteurs()));
-        std::cout << "Le candidat : " << candidat.getPrenom() << " " << candidat.getNom() << ", avec une sensibilite politique de " << candidat.getSensiPolitique() << " a ete ajoute a la liste de candidats." << std::endl ;
-    }
-}
-
-// SI LA LISTE EST TRIEE, UTILISER DICOTHOMIE POUR ALLER PLUS VITE
-void TableDecharge::supprimeCandidatDansListe(Personne candidat) {
-    bool candidatTrouve = false;
-    
-    // Vérifie si le candidat est présent dans la liste
-    for (auto it = p_listeCandidatsDecharge.begin(); it != p_listeCandidatsDecharge.end(); ++it) {
-        if (it->idCandidat == candidat.getId()) {
-            p_listeCandidatsDecharge.erase(it);
-            std::cout << "Le candidat : " << candidat.getPrenom() << " " << candidat.getNom() << ", a ete supprime de la liste de candidats." << std::endl;
-            candidatTrouve = true; 
-            break; 
-        }
-    }
-    
-    if (!candidatTrouve) {
-        std::cout << "Le candidat : " << candidat.getPrenom() << " " << candidat.getNom() << ", n'a pas ete trouve dans la liste de candidats." << std::endl;
+        ajouterBulletinBlanc(); 
+    } else {
+        std::cout << "La table de decharge contient deja des candidats." << std::endl ;
     }
 }
 

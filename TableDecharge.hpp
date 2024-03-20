@@ -3,6 +3,7 @@
 
 #include "Personne.hpp"
 #include "BulletinsCandiat.hpp"
+#include "Election.hpp"
 
 #include <iostream>
 #include <string>
@@ -25,10 +26,8 @@ public:
     size_t getTailleListeCandidats() const ;
     size_t getNombreElecteurs() const ;
 
-    void ajoutCandidatDansListe(Personne candidat);
-    void supprimeCandidatDansListe(Personne candidat);
+    void ajouterCandidats(Election election);
 
-    void ajouterBulletinBlanc() ;
     
 
 
@@ -37,6 +36,7 @@ private:
     std::vector<BulletinsCandiat> p_listeCandidatsDecharge;
     bool p_estEnUtilisation ; // determinera si un electeur est dans la table de décharge
 
+    void ajouterBulletinBlanc() ; // sera utilisée dans la methode ajouterCandidats();
 };
 
 

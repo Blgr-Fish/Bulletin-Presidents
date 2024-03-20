@@ -1,5 +1,6 @@
 #include "Personne.hpp"
 #include "TableDecharge.hpp"
+#include "Election.hpp"
 
 #include <cstdlib>
 #include <ctime>
@@ -28,7 +29,7 @@ int main(void)
    std::srand(std::time(nullptr));
 
    // création des personnes
-   std::vector<Personne*> listeElectorale = {
+   std::vector<Personne*> listePersonne = {
       new Personne("Benmammar", "adel", 9),
       new Personne("D", "pol", 5),
       new Personne("E", "lam", 1),
@@ -42,21 +43,22 @@ int main(void)
    };
    
 
+   Election electionCandidat("Elections 2024") ;
+   electionCandidat.ajouterCandidat(listePersonne[0]);
+   electionCandidat.ajouterCandidat(listePersonne[1]);
+   electionCandidat.ajouterCandidat(listePersonne[2]);
+   electionCandidat.ajouterCandidat(listePersonne[3]);
+
 
    // TODO
    // Code de simulation dans lequel on manipulera les personnes
    // via des pointeurs sur les éléments du vecteur vp.
    
 
-
-   TableDecharge table(listeElectorale.size());
-   table.ajouterBulletinBlanc();
-
-   table.ajoutCandidatDansListe(*listeElectorale[0]) ;
-   table.ajoutCandidatDansListe(*listeElectorale[1]) ;
-   table.ajoutCandidatDansListe(*listeElectorale[2]) ;
-   table.ajoutCandidatDansListe(*listeElectorale[0]) ;
-   table.supprimeCandidatDansListe(*listeElectorale[0]) ;
+   // ici ce n'est pas listePersonne.size() mais 
+   // il faudra ajouter une liste d'electeurs
+   TableDecharge table(listePersonne.size());
+   table.ajouterCandidats(electionCandidat);
 
    std::cout << table.getTailleListeCandidats() << std::endl ; 
    std::cout << table.getNombreElecteurs() << std::endl ;
@@ -65,7 +67,7 @@ int main(void)
    
 
    // destruction des personnes
-   for (Personne* psn : listeElectorale)
+   for (Personne* psn : listePersonne)
    {
       delete psn;
    }
