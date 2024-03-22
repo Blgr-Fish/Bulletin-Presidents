@@ -1,21 +1,23 @@
 #include "ElecteurEngage.hpp"
 
 ElecteurEngage::ElecteurEngage(const Personne& personne) 
-    : Personne(personne), p_tempRestant(0) {
-        
+    : Personne(personne), p_TempRestant(0) {
+        //p_BureauElecteur = bureau ;
     }
 
 int ElecteurEngage::getTempsRestant() {
-    return p_tempRestant;
+    return p_TempRestant;
 }
 
 void ElecteurEngage::decrementeTempsRestant() {
-    if (p_tempRestant > 0) {
-        p_tempRestant--;
+    if (p_TempRestant > 0) {
+        p_TempRestant--;
     }
 }
 
 
 void ElecteurEngage::setNouveauTempsRestant(int nouveauTemps) {
-    p_tempRestant = nouveauTemps;
+    p_TempRestant = nouveauTemps;
 }
+
+//Bureau ElecteurEngage::getBureau() const { return p_BureauElecteur;}

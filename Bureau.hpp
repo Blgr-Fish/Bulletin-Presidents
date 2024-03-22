@@ -4,7 +4,11 @@
 #include <iostream>
 #include <string>
 
+class Bureau{
 
+    
+
+};
 
 
 #endif

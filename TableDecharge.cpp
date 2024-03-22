@@ -4,7 +4,6 @@ TableDecharge::TableDecharge(size_t nombreElecteurs) {
 
     p_nombreElecteurs = nombreElecteurs;
 
-
 }
 
 size_t TableDecharge::getTailleListeCandidats() const { return p_listeCandidatsDecharge.size() ;} 
@@ -12,15 +11,17 @@ size_t TableDecharge::getNombreElecteurs() const { return p_nombreElecteurs ;}
 
 
 void TableDecharge::ajouterCandidats(Election election) {
+
     if(p_listeCandidatsDecharge.empty()) {
-        for (auto it = election.getListeCandidats().begin(); it != election.getListeCandidats().end(); ++it) {
-            p_listeCandidatsDecharge.push_back(BulletinsCandiat(it, getNombreElecteurs()));
-            std::cout << "Le candidat : " << it->getPrenom() << " " << it->getNom() << ", avec une sensibilite politique de " << it->getSensiPolitique() << " a ete ajoute a la liste de candidats." << std::endl ;
+        for(int i = 0 ; i< election.getNbCandidat() ; ++i) {
+            BulletinsCandiat bulletinC(*(election.getCandidat(i)),p_nombreElecteurs);
+            p_listeCandidatsDecharge.push_back(bulletinC);
+            std::cout << "Le candidat : " << election.getCandidat(i)->getPrenom() << " " <<election.getCandidat(i)->getNom() << ", avec une sensibilite politique de " << election.getCandidat(i)->getSensiPolitique() << " a ete ajoute a la liste de candidats." << std::endl ;
         }
-        ajouterBulletinBlanc(); 
     } else {
         std::cout << "La table de decharge contient deja des candidats." << std::endl ;
     }
+
 }
 
 

@@ -1,14 +1,20 @@
 #ifndef ELECTION_HPP
 #define ELECTION_HPP
 
+#include "Personne.hpp"
+
 #include <iostream>
 #include <string>
 #include <vector>
 
-#include "Personne.hpp"
 
 using namespace elections;
 
+
+/**
+* L'election représente la liste des candidats à élir. Elle pssède un nom ainsi qu'un vecteur contenant
+* l'ensemble des candidats.
+*/
 class Election {
 public:
 

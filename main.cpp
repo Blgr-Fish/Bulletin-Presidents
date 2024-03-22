@@ -28,6 +28,8 @@ int main(void)
    // initialisation du générateur de nombres aléatoires
    std::srand(std::time(nullptr));
 
+
+
    // création des personnes
    std::vector<Personne*> listePersonne = {
       new Personne("Benmammar", "adel", 9),
@@ -43,6 +45,9 @@ int main(void)
    };
    
 
+   std::cout << "creation de la liste de candidats" << std::endl ;
+
+
    Election electionCandidat("Elections 2024") ;
    electionCandidat.ajouterCandidat(listePersonne[0]);
    electionCandidat.ajouterCandidat(listePersonne[1]);
@@ -57,9 +62,13 @@ int main(void)
 
    // ici ce n'est pas listePersonne.size() mais 
    // il faudra ajouter une liste d'electeurs
+
+   std::cout << "creation de la table de decharge" << std::endl ;
+
+
    TableDecharge table(listePersonne.size());
    table.ajouterCandidats(electionCandidat);
-
+   
    std::cout << table.getTailleListeCandidats() << std::endl ; 
    std::cout << table.getNombreElecteurs() << std::endl ;
 

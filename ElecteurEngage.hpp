@@ -3,6 +3,7 @@
 
 #include "Personne.hpp"
 #include "BulletinsCandiat.hpp"
+#include "Bureau.hpp"
 
 #include <iostream>
 #include <string>
@@ -31,14 +32,18 @@ public:
     void setNouveauTempsRestant(int nouveauTemps);
     void decrementeTempsRestant();
 
+   // Bureau getBureau() const ;
+
 
   
 
 
 private:
-    int p_tempRestant ; // temps restant pour effectuer l'action ( isoloir, table de décharge, etc)
+    int p_TempRestant ; // temps restant pour effectuer l'action ( isoloir, table de décharge, etc)
     std::list<BulletinsCandiat> p_BulletinsChoisis ;
     BulletinsCandiat p_BulletinFinal ;
+
+   // Bureau p_BureauElecteur ; // un electeur se voit attribuer un bureau de vote
 
 };
 

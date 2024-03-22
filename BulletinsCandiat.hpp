@@ -14,7 +14,7 @@ struct BulletinsCandiat {
     int idCandidat ;
     size_t nombreDeBulletins;
 
-    BulletinsCandiat(Personne candidat, size_t nombreDeBulletins) 
+    BulletinsCandiat(Personne& candidat, size_t& nombreDeBulletins) 
         :nomCandidat(candidat.getNom()), idCandidat(candidat.getId()), nombreDeBulletins(nombreDeBulletins) {}
 
     BulletinsCandiat(std::string nom, int id,size_t nombreDeBulletins) 
