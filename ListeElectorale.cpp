@@ -8,6 +8,8 @@ ListeElectorale::ListeElectorale(std::vector<Personne*> listePersonne) {
     }
 }
 
+
+
 ElecteurEngage* ListeElectorale::rechercherElecteur(ElecteurEngage& electeur) const{
    
 
@@ -36,4 +38,14 @@ ElecteurEngage* ListeElectorale::rechercherElecteur(Personne& personne) const{
         std::cout << "La personne " << personne << " n'est pas presente sur la liste" << std::endl ;
         return nullptr; 
     }
+}
+
+
+
+void ListeElectorale::ajouterElecteur(Personne* & personne) {
+    p_ListeElectorale.insert(new ElecteurEngage(*personne)); 
+}
+
+void ListeElectorale::ajouterElecteur(ElecteurEngage* & electeur) {
+    p_ListeElectorale.insert(electeur); 
 }

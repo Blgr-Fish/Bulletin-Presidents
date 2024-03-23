@@ -4,6 +4,14 @@
 #include <iostream>
 #include <string>
 
+class TableVote{
+
+private:
+
+public:
+
+
+};
 
 
 

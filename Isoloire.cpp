@@ -1,6 +1,6 @@
 #include "Isoloire.hpp"
 
-int Isoloire::p_isoloireId = 0; // représente le nombre total d'electeurs, s'incrémente a chaque instanciation
+int Isoloire::p_isoloireId = 0; // représente le nombre total d'isoloires, s'incrémente a chaque instanciation
 
 Isoloire::Isoloire(int temps) : p_etat(true), p_dureeChoix(temps) , p_id(p_isoloireId++){}
 

@@ -2,7 +2,6 @@
 
 ElecteurEngage::ElecteurEngage(const Personne& personne) 
     : Personne(personne), p_TempRestant(0) {
-        //p_BureauElecteur = bureau ;
     }
 
 int ElecteurEngage::getTempsRestant() {

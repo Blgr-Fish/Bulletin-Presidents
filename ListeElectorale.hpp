@@ -25,9 +25,14 @@ public:
 
     ListeElectorale(std::vector<Personne*> listePersonne);
 
+
     size_t getTailleListeElectorale() const ;
     ElecteurEngage* rechercherElecteur(ElecteurEngage& electeur) const;
     ElecteurEngage* rechercherElecteur(Personne& personne) const;
+
+
+    void ajouterElecteur(Personne* & electeur) ;
+    void ajouterElecteur(ElecteurEngage* & electeur);
 
 
     
