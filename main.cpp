@@ -1,6 +1,7 @@
 #include "Personne.hpp"
 #include "TableDecharge.hpp"
 #include "Election.hpp"
+#include "ListeElectorale.hpp"
 
 #include <cstdlib>
 #include <ctime>
@@ -43,16 +44,24 @@ int main(void)
       new Personne("Y", "rik", 2),
       new Personne("Z", "pat", 8)
    };
+
+
    
 
    std::cout << "creation de la liste de candidats" << std::endl ;
-
-
    Election electionCandidat("Elections 2024") ;
    electionCandidat.ajouterCandidat(listePersonne[0]);
    electionCandidat.ajouterCandidat(listePersonne[1]);
    electionCandidat.ajouterCandidat(listePersonne[2]);
    electionCandidat.ajouterCandidat(listePersonne[3]);
+
+
+   std::cout << "creation de la liste d'electeurs" << std::endl ;
+   ListeElectorale listeElectorale(listePersonne);
+   
+   ElecteurEngage* ele = listeElectorale.rechercherElecteur(*new Personne("test","test",10));
+
+   
 
 
    // TODO

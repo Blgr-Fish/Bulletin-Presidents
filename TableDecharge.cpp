@@ -16,7 +16,6 @@ void TableDecharge::ajouterCandidats(Election election) {
         for(int i = 0 ; i< election.getNbCandidat() ; ++i) {
             BulletinsCandiat bulletinC(*(election.getCandidat(i)),p_nombreElecteurs);
             p_listeCandidatsDecharge.push_back(bulletinC);
-            std::cout << "Le candidat : " << election.getCandidat(i)->getPrenom() << " " <<election.getCandidat(i)->getNom() << ", avec une sensibilite politique de " << election.getCandidat(i)->getSensiPolitique() << " a ete ajoute a la liste de candidats." << std::endl ;
         }
     } else {
         std::cout << "La table de decharge contient deja des candidats." << std::endl ;

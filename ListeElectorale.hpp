@@ -10,6 +10,8 @@
 #include <set>
 #include <vector>
 
+using namespace elections;
+
 
 /**
 * La liste d'electeurs représente un groupe de personne de type ElecteurEngage
@@ -24,15 +26,19 @@ public:
     ListeElectorale(std::vector<Personne*> listePersonne);
 
     size_t getTailleListeElectorale() const ;
-    ElecteurEngage* getElecteur() ;
+    ElecteurEngage* rechercherElecteur(ElecteurEngage& electeur) const;
+    ElecteurEngage* rechercherElecteur(Personne& personne) const;
+
+
+    
 
 
 
 private:
 
     size_t p_TailleListeElectorale;
-    std::set<ElecteurEngage*, CompAlpha> p_ListeElectorale;
-
+    std::set<ElecteurEngage*, ElecteurEngage::CompAlpha> p_ListeElectorale;
+    
  };
 
 #endif

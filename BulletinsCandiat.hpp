@@ -1,3 +1,7 @@
+#ifndef BULLETINCANDIDAT_HPP
+#define BULLETINCANDIDAT_HPP
+
+
 #include "Personne.hpp"
 
 
@@ -22,3 +26,5 @@ struct BulletinsCandiat {
 
     BulletinsCandiat() : nomCandidat("error"), idCandidat(-1), nombreDeBulletins(-1) {}
 };
+
+#endif

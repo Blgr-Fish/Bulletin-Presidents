@@ -45,6 +45,7 @@
         "numbers": "cpp",
         "ostream": "cpp",
         "streambuf": "cpp",
-        "list": "cpp"
+        "list": "cpp",
+        "set": "cpp"
     }
 }
