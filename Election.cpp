@@ -4,6 +4,15 @@ Election::Election(std::string nom) {
     p_nomElection = nom ;
 }
 
+Election::Election(const Election& copy){
+    p_nomElection = copy.getNom();
+
+    for (Personne* psn :copy.getListeCandidats()) {
+        ajouterCandidat(psn);
+    }
+}
+
+
 std::string Election::getNom() const { return p_nomElection ;}
 Personne* Election::getCandidat(int index) const { return p_listeCandidat[index];}
 int Election::getNbCandidat() const { return p_listeCandidat.size();}

@@ -26,13 +26,15 @@ class Bureau{
  * Les 3 lieux seront séparés par des files.
 **/
 public:
-    Bureau(const TableDecharge& tableDecharge, const std::vector<Isoloire> & isoloires, const TableVote& tableVote, std::vector<ElecteurEngage*> listeElecteurs );
+    Bureau(const std::vector<Isoloire> & isoloires, const TableVote& tableVote,
+          std::vector<ElecteurEngage*>&  listeElecteurs, Election&  election);
+
 
 private:
 
     TableDecharge p_tableDechargeBureau;
     std::vector<Isoloire> p_listeIsoloires; // 1 ou plusieurs isoloires
-    //TableVote p_tableVoteBureau;
+    TableVote p_tableVoteBureau;
 
 
 

@@ -19,6 +19,7 @@ class Election {
 public:
 
    Election(std::string nom);
+   Election(const Election& copy);
    std::string getNom() const;
    Personne* getCandidat(int index) const;
    int getNbCandidat() const;

@@ -19,4 +19,6 @@ void ElecteurEngage::setNouveauTempsRestant(int nouveauTemps) {
     p_TempRestant = nouveauTemps;
 }
 
-//Bureau ElecteurEngage::getBureau() const { return p_BureauElecteur;}
+void ElecteurEngage::prendreBulletin(BulletinsCandiat bulletin)  {
+    p_BulletinsChoisis.push_back(bulletin);
+}

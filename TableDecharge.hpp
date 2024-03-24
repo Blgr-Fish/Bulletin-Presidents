@@ -1,13 +1,13 @@
 #ifndef TABLEDECHARGE_HPP
 #define TABLEDECHARGE_HPP
 
-#include "Personne.hpp"
+#include "ElecteurEngage.hpp"
 #include "BulletinsCandiat.hpp"
 #include "Election.hpp"
 
 #include <iostream>
 #include <string>
-#include <vector>
+#include <unordered_map>
 
 using namespace elections;
 
@@ -28,12 +28,14 @@ public:
 
     void ajouterCandidats(Election election);
 
+    void choisirBulletins(ElecteurEngage* & electeur) ;
+
     
 
 
 private: 
     size_t p_nombreElecteurs ;
-    std::vector<BulletinsCandiat> p_listeCandidatsDecharge;
+    std::unordered_map<size_t, BulletinsCandiat> p_tableHachageCandidatsDecharge; // ici la clé est un int, ce sera simplement l'id des candiats
     bool p_estEnUtilisation ; // determinera si un electeur est dans la table de décharge
 
     void ajouterBulletinBlanc() ; // sera utilisée dans la methode ajouterCandidats();

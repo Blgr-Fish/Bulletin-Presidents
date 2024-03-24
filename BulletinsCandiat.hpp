@@ -17,14 +17,22 @@ struct BulletinsCandiat {
     std::string nomCandidat;
     int idCandidat ;
     size_t nombreDeBulletins;
+    size_t candidatSpol ;
 
     BulletinsCandiat(Personne& candidat, size_t& nombreDeBulletins) 
-        :nomCandidat(candidat.getNom()), idCandidat(candidat.getId()), nombreDeBulletins(nombreDeBulletins) {}
+        :nomCandidat(candidat.getNom()), idCandidat(candidat.getId()), nombreDeBulletins(nombreDeBulletins) {
+            candidatSpol = candidat.getSensiPolitique();
+        }
 
+    //Seulement pour le bulletin blanc
     BulletinsCandiat(std::string nom, int id,size_t nombreDeBulletins) 
-        :nomCandidat(nom), idCandidat(id), nombreDeBulletins(nombreDeBulletins) {}
+        :nomCandidat(nom), idCandidat(id), nombreDeBulletins(nombreDeBulletins) {
+            candidatSpol = -1 ; // un bulletin blanc n'a pas de spol
+        }
 
-    BulletinsCandiat() : nomCandidat("error"), idCandidat(-1), nombreDeBulletins(-1) {}
+    BulletinsCandiat() =  default ;
+
+    
 };
 
 #endif

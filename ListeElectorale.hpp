@@ -24,6 +24,7 @@ class ListeElectorale {
 public:
 
     ListeElectorale(std::vector<Personne*> listePersonne);
+    ListeElectorale(std::vector<ElecteurEngage*> listeElecteur);
 
 
     size_t getTailleListeElectorale() const ;

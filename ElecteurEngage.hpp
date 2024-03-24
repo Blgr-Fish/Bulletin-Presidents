@@ -32,7 +32,7 @@ public:
     void setNouveauTempsRestant(int nouveauTemps);
     void decrementeTempsRestant();
 
-   // Bureau getBureau() const ;
+    void prendreBulletin(BulletinsCandiat) ;
 
    
 

@@ -8,6 +8,14 @@ ListeElectorale::ListeElectorale(std::vector<Personne*> listePersonne) {
     }
 }
 
+ListeElectorale::ListeElectorale(std::vector<ElecteurEngage*> listeElecteur) {
+
+    for (ElecteurEngage* ele : listeElecteur) {
+         // Cette operation est en O(log*n)
+        p_ListeElectorale.insert(ele); 
+    }
+}
+
 
 
 ElecteurEngage* ListeElectorale::rechercherElecteur(ElecteurEngage& electeur) const{
