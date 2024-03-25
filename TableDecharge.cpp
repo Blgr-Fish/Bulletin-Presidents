@@ -29,7 +29,7 @@ void TableDecharge::ajouterCandidats(Election election) {
 // et ces bulletins sont choisis en fonction de la sensibilité politique.
 void TableDecharge::choisirBulletins(ElecteurEngage* &electeur) {
     const size_t distMax = Parametrage::DISTANCE_POLITIQUE_MAXIMALE;
-    const double probaBlanc = Parametrage::PROBABILITE_VOTE_BLANC;
+    const double probaBlanc = 0;
     std::vector<BulletinsCandiat> tempListeCandidats;
 
     // Premier parcours de la liste pour récupérer les bulletins avec une bonne sensibilité politique
@@ -59,12 +59,17 @@ void TableDecharge::choisirBulletins(ElecteurEngage* &electeur) {
         std::uniform_int_distribution<size_t> dis(2, tailleListe);
         
         size_t nombreBulletinsAChoisir = dis(gen);
+        std::cout << "nombre de bulletins : "<<std::endl ;
+        std::cout << nombreBulletinsAChoisir << std::endl ;
 
         for (size_t i = 0; i < nombreBulletinsAChoisir; ++i) {
             // dis(gen) donne une valeur min = 1 , donc -1 pour avoir 0
             size_t index = dis(gen) - 1; 
             electeur->prendreBulletin(tempListeCandidats[index]);
             p_tableHachageCandidatsDecharge[tempListeCandidats[index].idCandidat].nombreDeBulletins -= 1 ;
+            
+            // on supprime l'élément pour ne pas a le reprendre
+            tempListeCandidats.erase(tempListeCandidats.begin() + index);
         }
 
         const double randValeur = ((double) rand() / (RAND_MAX)) ; // donne une val entre 0 et 1

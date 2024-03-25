@@ -22,10 +22,10 @@ int main(void)
 
    // création des personnes
    std::vector<Personne*> listePersonne = {
-      new Personne("Benmammar", "adel", 9),
+      new Personne("Benmammar", "adel", 5),
       new Personne("D", "pol", 5),
-      new Personne("E", "lam", 1),
-      new Personne("F", "bul", 10),
+      new Personne("E", "lam", 4),
+      new Personne("F", "bul", 6),
       new Personne("G", "yap", 3),
       new Personne("Ijja", "ziad", 7),
       new Personne("Traore", "alfousseny", 2),
@@ -48,7 +48,7 @@ int main(void)
    std::cout << "creation de la liste d'electeurs" << std::endl ;
    ListeElectorale listeElectorale(listePersonne);
    
-   ElecteurEngage* ele = listeElectorale.rechercherElecteur(*new Personne("test","test",10));
+   ElecteurEngage* ele = listeElectorale.rechercherElecteur(*listePersonne[0]);
 
    
 
@@ -69,6 +69,14 @@ int main(void)
    
    std::cout << table.getTailleListeCandidats() << std::endl ; 
    std::cout << table.getNombreElecteurs() << std::endl ;
+
+   std::cout << "--- TESTS ---" << std::endl ;
+
+   table.choisirBulletins(ele) ;
+   std::cout << "affichage des candidats du bulletin :" << std::endl;
+   for (BulletinsCandiat b : ele->getBulletins()) {
+      std::cout << b.nomCandidat << std::endl ;
+   }
 
 
    

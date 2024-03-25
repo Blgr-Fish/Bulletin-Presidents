@@ -22,3 +22,7 @@ void ElecteurEngage::setNouveauTempsRestant(int nouveauTemps) {
 void ElecteurEngage::prendreBulletin(BulletinsCandiat bulletin)  {
     p_BulletinsChoisis.push_back(bulletin);
 }
+
+std::list<BulletinsCandiat> ElecteurEngage::getBulletins() const {
+    return p_BulletinsChoisis ;
+}
