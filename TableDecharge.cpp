@@ -2,12 +2,12 @@
 #include "Parametrage.hpp"
 
 #include <random>
+#include <algorithm> 
+
 
 
 TableDecharge::TableDecharge(size_t nombreElecteurs) {
-
-    p_nombreElecteurs = nombreElecteurs;
-
+ p_nombreElecteurs = nombreElecteurs;
 }
 
 size_t TableDecharge::getTailleListeCandidats() const { return p_tableHachageCandidatsDecharge.size() ;} 
@@ -20,23 +20,26 @@ void TableDecharge::ajouterCandidats(Election election) {
             BulletinsCandiat bulletinC(*(election.getCandidat(i)),p_nombreElecteurs);
             p_tableHachageCandidatsDecharge[election.getCandidat(i)->getId()] = bulletinC;
         }
+        ajouterBulletinBlanc();
     } else {
         std::cout << "La table de decharge contient deja des candidats." << std::endl;
     }
+    
 }
 
 // Un electeur prend minimum 2 bulletins (max : nombre de candidats) distincts,
 // et ces bulletins sont choisis en fonction de la sensibilité politique.
 void TableDecharge::choisirBulletins(ElecteurEngage* &electeur) {
     const size_t distMax = Parametrage::DISTANCE_POLITIQUE_MAXIMALE;
-    const double probaBlanc = 0;
+    const double probaBlanc = Parametrage::PROBABILITE_VOTE_BLANC;
     std::vector<BulletinsCandiat> tempListeCandidats;
 
     // Premier parcours de la liste pour récupérer les bulletins avec une bonne sensibilité politique
     for (auto& kv : p_tableHachageCandidatsDecharge) {
         auto& bulletin = kv.second;
-        if (bulletin.candidatSpol > electeur->getSensiPolitique() - distMax 
-            && bulletin.candidatSpol < electeur->getSensiPolitique() + distMax
+       
+        if ( std::max(bulletin.candidatSpol,(size_t)electeur->getSensiPolitique())
+           - std::min(bulletin.candidatSpol,(size_t)electeur->getSensiPolitique()) < distMax
             && bulletin.nombreDeBulletins > 0) {
 
             tempListeCandidats.push_back(bulletin);
@@ -56,23 +59,22 @@ void TableDecharge::choisirBulletins(ElecteurEngage* &electeur) {
         // mais utiliser mt19937 et uniform_int_distribution donne de meilleurs valeurs
         std::random_device seed;
         std::mt19937 gen(seed());
-        std::uniform_int_distribution<size_t> dis(2, tailleListe);
-        
-        size_t nombreBulletinsAChoisir = dis(gen);
-        std::cout << "nombre de bulletins : "<<std::endl ;
-        std::cout << nombreBulletinsAChoisir << std::endl ;
 
-        for (size_t i = 0; i < nombreBulletinsAChoisir; ++i) {
-            // dis(gen) donne une valeur min = 1 , donc -1 pour avoir 0
-            size_t index = dis(gen) - 1; 
-            electeur->prendreBulletin(tempListeCandidats[index]);
-            p_tableHachageCandidatsDecharge[tempListeCandidats[index].idCandidat].nombreDeBulletins -= 1 ;
-            
-            // on supprime l'élément pour ne pas a le reprendre
-            tempListeCandidats.erase(tempListeCandidats.begin() + index);
+        // va donner un size_t aleatoire entre 2 et tailleListe
+        std::uniform_int_distribution<size_t> distance(2, tailleListe);
+        size_t nombreBulletinsAChoisir = distance(gen);
+
+        // on mélange la liste et on recupere les nombreBulletinsAChoisir premiers elements 
+        std::shuffle(tempListeCandidats.begin(), tempListeCandidats.end(), gen);
+
+        for (size_t i = 0; i < nombreBulletinsAChoisir; ++i) {     
+            electeur->prendreBulletin(tempListeCandidats[i]);
+            p_tableHachageCandidatsDecharge[tempListeCandidats[i].idCandidat].nombreDeBulletins -= 1 ;
         }
 
-        const double randValeur = ((double) rand() / (RAND_MAX)) ; // donne une val entre 0 et 1
+    
+        std::uniform_int_distribution<size_t> BulletinBlancChance(0, 100);
+        const double randValeur = (float) BulletinBlancChance(gen) / 100 ; // donne une val entre 0 et 1
 
         if(randValeur <= probaBlanc) {
             electeur->prendreBulletin(p_tableHachageCandidatsDecharge[-1]);

@@ -43,6 +43,11 @@ int main(void)
    electionCandidat.ajouterCandidat(listePersonne[1]);
    electionCandidat.ajouterCandidat(listePersonne[2]);
    electionCandidat.ajouterCandidat(listePersonne[3]);
+   electionCandidat.ajouterCandidat(listePersonne[4]);
+   electionCandidat.ajouterCandidat(listePersonne[5]);
+   electionCandidat.ajouterCandidat(listePersonne[6]);
+   electionCandidat.ajouterCandidat(listePersonne[7]);
+   electionCandidat.ajouterCandidat(listePersonne[8]);
 
 
    std::cout << "creation de la liste d'electeurs" << std::endl ;
