@@ -6,21 +6,21 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include <queue>
 
 
 class Isoloire{
     public:
-    Isoloire(int temps);
+    Isoloire();
     void entrerIsoloire(ElecteurEngage* electeur);
-    void sortirIsoloire();
+    void sortirIsoloire(std::queue<ElecteurEngage*> file);
     bool estVide() ;
     ElecteurEngage* getOccupant();
-    void choisirBulletin(); // choisir un bulletin implique de jeter les autres
+    void choisirBulletinFinal(); // choisir un bulletin implique de jeter les autres
 
     private:
     ElecteurEngage* p_electeurOccupant;
     bool p_etat;
-    int p_dureeChoix;
     static int p_isoloireId ; // compteur des isoloires
     const int p_id ;
 };

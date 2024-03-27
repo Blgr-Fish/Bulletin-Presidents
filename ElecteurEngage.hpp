@@ -33,8 +33,10 @@ public:
     void decrementeTempsRestant();
 
     void prendreBulletin(BulletinsCandiat) ;
+    void prendreBulletinFinal(BulletinsCandiat bulletin);
     
     std::list<BulletinsCandiat> getBulletins() const ;
+    BulletinsCandiat getBulletinFinal() const ;
 
    
 

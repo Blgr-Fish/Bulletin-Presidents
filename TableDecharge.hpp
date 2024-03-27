@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include <string>
-#include <unordered_map>
+#include <map>
 
 using namespace elections;
 
@@ -35,7 +35,7 @@ public:
 
 private: 
     size_t p_nombreElecteurs ;
-    std::unordered_map<size_t, BulletinsCandiat> p_tableHachageCandidatsDecharge; // ici la clé est un int, ce sera simplement l'id des candiats
+    std::map<size_t, BulletinsCandiat> p_tableHachageCandidatsDecharge; // ici la clé est un int, ce sera simplement l'id des candiats
     bool p_estEnUtilisation ; // determinera si un electeur est dans la table de décharge
 
     void ajouterBulletinBlanc() ; // sera utilisée dans la methode ajouterCandidats();

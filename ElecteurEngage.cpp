@@ -26,3 +26,11 @@ void ElecteurEngage::prendreBulletin(BulletinsCandiat bulletin)  {
 std::list<BulletinsCandiat> ElecteurEngage::getBulletins() const {
     return p_BulletinsChoisis ;
 }
+
+void ElecteurEngage::prendreBulletinFinal(BulletinsCandiat bulletin) {
+    p_BulletinFinal = bulletin ;
+}
+
+BulletinsCandiat ElecteurEngage::getBulletinFinal() const {
+    return p_BulletinFinal ;
+}

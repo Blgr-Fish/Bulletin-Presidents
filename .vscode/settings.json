@@ -46,7 +46,8 @@
         "ostream": "cpp",
         "streambuf": "cpp",
         "list": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "map": "cpp"
     },
     "C_Cpp.errorSquiggles": "enabled"
 }

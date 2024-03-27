@@ -30,10 +30,13 @@ public:
     size_t getTailleListeElectorale() const ;
     ElecteurEngage* rechercherElecteur(ElecteurEngage& electeur) const;
     ElecteurEngage* rechercherElecteur(Personne& personne) const;
+    std::set<ElecteurEngage*,ElecteurEngage::CompAlpha> getListeElectorale() const ;
 
 
     void ajouterElecteur(Personne* & electeur) ;
     void ajouterElecteur(ElecteurEngage* & electeur);
+
+
 
 
     

@@ -28,10 +28,10 @@ class Bureau{
 public:
     Bureau(const std::vector<Isoloire> & isoloires, const TableVote& tableVote,
           std::vector<ElecteurEngage*>&  listeElecteurs, Election&  election);
-
-
+    void init();
 private:
 
+    
     TableDecharge p_tableDechargeBureau;
     std::vector<Isoloire> p_listeIsoloires; // 1 ou plusieurs isoloires
     TableVote p_tableVoteBureau;
@@ -43,17 +43,14 @@ private:
     // c'est un sous ensemble de la liste electorale 
     ListeElectorale p_listeElectoraleBureau ;
     Election p_listeCandidatsBureau ;
-
     
-
-
     /**                    
      *                     --> Isoloire ↘            
      *  --> Table décharge --> Isoloire --> Table de vote
      *                     --> Isoloire ↗                                  
     */
     std::queue<ElecteurEngage*> p_fileBureauVersTableDecharge ;
-    std::vector<std::queue<ElecteurEngage*>> p_fileTableDechargeVersIsoloires; // c'est un vecteur de files, car il y a plusieurs isoloires, donc plusieurs files
+    //std::vector<std::queue<ElecteurEngage*>> p_fileTableDechargeVersIsoloires; // c'est un vecteur de files, car il y a plusieurs isoloires, donc plusieurs files
     std::queue<ElecteurEngage*> p_fileIsoloiresVersTableVote;
 
     

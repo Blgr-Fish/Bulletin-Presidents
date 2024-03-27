@@ -2,6 +2,7 @@
 #include "TableDecharge.hpp"
 #include "Election.hpp"
 #include "ListeElectorale.hpp"
+#include "Isoloire.hpp"
 
 #include <cstdlib>
 #include <ctime>
@@ -46,8 +47,7 @@ int main(void)
    electionCandidat.ajouterCandidat(listePersonne[4]);
    electionCandidat.ajouterCandidat(listePersonne[5]);
    electionCandidat.ajouterCandidat(listePersonne[6]);
-   electionCandidat.ajouterCandidat(listePersonne[7]);
-   electionCandidat.ajouterCandidat(listePersonne[8]);
+
 
 
    std::cout << "creation de la liste d'electeurs" << std::endl ;
@@ -78,12 +78,17 @@ int main(void)
    std::cout << "--- TESTS ---" << std::endl ;
 
    table.choisirBulletins(ele) ;
-   std::cout << "affichage des candidats du bulletin :" << std::endl;
+   std::cout << "l'electeur a recupere les bulletins suivants :" << std::endl;
    for (BulletinsCandiat b : ele->getBulletins()) {
       std::cout << b.nomCandidat << std::endl ;
    }
 
-
+   
+   Isoloire isoloire ;
+   isoloire.entrerIsoloire(ele);
+   isoloire.choisirBulletinFinal();
+   //isoloire.sortirIsoloire();
+   std::cout << " le bulletin final est : " << ele->getBulletinFinal().nomCandidat << std::endl ;
    
 
    // destruction des personnes

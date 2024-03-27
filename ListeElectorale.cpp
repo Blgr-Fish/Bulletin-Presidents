@@ -57,3 +57,7 @@ void ListeElectorale::ajouterElecteur(Personne* & personne) {
 void ListeElectorale::ajouterElecteur(ElecteurEngage* & electeur) {
     p_ListeElectorale.insert(electeur); 
 }
+
+std::set<ElecteurEngage*,ElecteurEngage::CompAlpha> ListeElectorale::getListeElectorale() const {
+    return p_ListeElectorale;
+}
