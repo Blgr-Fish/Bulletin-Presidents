@@ -77,7 +77,8 @@ int main(void)
 
    std::cout << "--- TESTS ---" << std::endl ;
 
-   table.choisirBulletins(ele) ;
+   table.entrerTableDecharge(ele);
+   table.choisirBulletins() ;
    std::cout << "l'electeur a recupere les bulletins suivants :" << std::endl;
    for (BulletinsCandiat b : ele->getBulletins()) {
       std::cout << b.nomCandidat << std::endl ;

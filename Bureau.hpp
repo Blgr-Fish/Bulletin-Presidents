@@ -6,6 +6,7 @@
 #include "TableVote.hpp"
 #include "ElecteurEngage.hpp"
 #include "ListeElectorale.hpp"
+#include "Parametrage.hpp"
 
 #include <iostream>
 #include <string>
@@ -27,13 +28,10 @@ class Bureau {
 public:
     /**
      * Constructeur.
-     * \param isoloires liste des isoloires disponibles dans le bureau
-     * \param tableVote table de vote où se termine le processus de vote
      * \param listeElecteurs liste des électeurs assignés à ce bureau
      * \param election élection en cours dans ce bureau
      */
-    Bureau(const std::vector<Isoloire> & isoloires, const TableVote& tableVote,
-           std::vector<ElecteurEngage*>&  listeElecteurs, Election&  election);
+    Bureau(std::vector<ElecteurEngage*>&  listeElecteurs, Election&  election);
 
     /**
      * Initialise le bureau de vote.
@@ -43,7 +41,7 @@ public:
 private:
     TableDecharge p_tableDechargeBureau; // Table de décharge du bureau
     std::vector<Isoloire> p_listeIsoloires; // Liste des isoloires disponibles dans le bureau
-    TableVote p_tableVoteBureau; // Table de vote du bureau
+    //TableVote p_tableVoteBureau; // Table de vote du bureau
 
     ListeElectorale p_listeElectoraleBureau; // Liste des électeurs votant dans ce bureau
     Election p_listeCandidatsBureau; // Liste des candidats de l'élection en cours dans ce bureau

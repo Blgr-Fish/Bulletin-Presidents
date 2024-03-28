@@ -18,7 +18,7 @@ void Isoloire::entrerIsoloire(ElecteurEngage* electeur) {
         p_etat = false; 
         std::cout << "L'electeur " << p_electeurOccupant->getNom() << " est entre dans l'isoloir " << p_isoloireId << std::endl; 
     } else {
-         std::cout << "L'electeur " << electeur << " a tente d'entrer dans l'isoloir" << p_isoloireId << " qui est deja en cours d'utilisation." << std::endl; 
+         std::cout << "L'electeur " << p_electeurOccupant->getNom() << " a tente d'entrer dans l'isoloir" << p_isoloireId << " qui est deja en cours d'utilisation." << std::endl; 
     }
 }
 

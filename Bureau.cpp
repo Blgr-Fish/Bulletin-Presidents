@@ -1,13 +1,21 @@
 #include "Bureau.hpp"
 
 
-Bureau::Bureau(const std::vector<Isoloire> & isoloires, const TableVote& tableVote,
-               std::vector<ElecteurEngage*>& listeElecteurs, Election &election)
-               : p_tableDechargeBureau(listeElecteurs.size()), 
-                 p_listeIsoloires(isoloires.begin(), isoloires.end()), 
-                 p_listeElectoraleBureau(listeElecteurs),
-                 p_listeCandidatsBureau(election) {
-                 p_tableVoteBureau = tableVote;
+Bureau::Bureau(std::vector<ElecteurEngage*>& listeElecteurs, Election &election)
+        :   p_tableDechargeBureau(listeElecteurs.size()), 
+            p_listeElectoraleBureau(listeElecteurs),
+            p_listeCandidatsBureau(election) {
+
+        
+        //p_tableVoteBureau ;
+
+        // initialisation des isoloires
+        for (int i = 0 ; i < Parametrage::NOMBRE_ISOLOIRS ; ++i) {
+            Isoloire isoloire ;
+            p_listeIsoloires.push_back(isoloire);
+        }
+
+        p_tableDechargeBureau.ajouterCandidats(p_listeCandidatsBureau);
 }
 
 void Bureau::init(){

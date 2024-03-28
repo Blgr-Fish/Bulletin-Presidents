@@ -10,6 +10,37 @@ TableDecharge::TableDecharge(size_t nombreElecteurs) {
  p_nombreElecteurs = nombreElecteurs;
 }
 
+
+void TableDecharge::entrerTableDecharge(ElecteurEngage* electeur) {
+     // on vérifie si l'isoloire est vide avant d'accepter un électeur
+    if (estVide()) {
+        p_electeurOccupant = electeur;
+        p_etat = false; 
+        std::cout << "L'electeur " << p_electeurOccupant->getNom() << " est entre dans la table de decharge " << std::endl; 
+    } else {
+         std::cout << "L'electeur " << p_electeurOccupant->getNom() << " a tente d'entrer dans la table de decharge qui est deja en cours d'utilisation." << std::endl; 
+    }
+}
+
+
+void TableDecharge::sortirTableDecharge(std::queue<ElecteurEngage*> file) {
+    
+    // Marche meme si il n'y a pas d'electeurs
+    p_etat = true;
+    std::cout << "La table de decharge a ete vide."<< std::endl; 
+
+    // on envois l'occupant dans la file et on le passe a nullptr
+    if (p_electeurOccupant != nullptr) {
+        file.push(p_electeurOccupant);
+        p_electeurOccupant = nullptr ;
+    } 
+}
+
+
+bool TableDecharge::estVide() {
+    return p_etat;
+}
+
 size_t TableDecharge::getTailleListeCandidats() const { return p_tableHachageCandidatsDecharge.size() ;} 
 size_t TableDecharge::getNombreElecteurs() const { return p_nombreElecteurs ;} 
 
@@ -29,7 +60,7 @@ void TableDecharge::ajouterCandidats(Election election) {
 
 // Un electeur prend minimum 2 bulletins (max : nombre de candidats) distincts,
 // et ces bulletins sont choisis en fonction de la sensibilité politique.
-void TableDecharge::choisirBulletins(ElecteurEngage* &electeur) {
+void TableDecharge::choisirBulletins() {
     const size_t distMax = Parametrage::DISTANCE_POLITIQUE_MAXIMALE;
     const double probaBlanc = Parametrage::PROBABILITE_VOTE_BLANC;
     std::vector<BulletinsCandiat> tempListeCandidats;
@@ -38,8 +69,8 @@ void TableDecharge::choisirBulletins(ElecteurEngage* &electeur) {
     for (auto& kv : p_tableHachageCandidatsDecharge) {
         auto& bulletin = kv.second;
        
-        if ( std::max(bulletin.candidatSpol,(size_t)electeur->getSensiPolitique())
-           - std::min(bulletin.candidatSpol,(size_t)electeur->getSensiPolitique()) < distMax
+        if ( std::max(bulletin.candidatSpol,(size_t)p_electeurOccupant->getSensiPolitique())
+           - std::min(bulletin.candidatSpol,(size_t)p_electeurOccupant->getSensiPolitique()) < distMax
             && bulletin.nombreDeBulletins > 0) {
 
             tempListeCandidats.push_back(bulletin);
@@ -47,7 +78,7 @@ void TableDecharge::choisirBulletins(ElecteurEngage* &electeur) {
     }
     // On prend par défaut un bulletin blanc si la liste est vide ou alors qu'il reste qu'un seul bulletin
     if (tempListeCandidats.size() < 2) {
-        electeur->prendreBulletin(p_tableHachageCandidatsDecharge[-1]);
+        p_electeurOccupant->prendreBulletin(p_tableHachageCandidatsDecharge[-1]);
         p_tableHachageCandidatsDecharge[-1].nombreDeBulletins -= 1 ;
     } else {
         // Recuperation aleatoire de 2 à nombre de candidats bulletins
@@ -68,7 +99,7 @@ void TableDecharge::choisirBulletins(ElecteurEngage* &electeur) {
         std::shuffle(tempListeCandidats.begin(), tempListeCandidats.end(), gen);
 
         for (size_t i = 0; i < nombreBulletinsAChoisir; ++i) {     
-            electeur->prendreBulletin(tempListeCandidats[i]);
+            p_electeurOccupant->prendreBulletin(tempListeCandidats[i]);
             p_tableHachageCandidatsDecharge[tempListeCandidats[i].idCandidat].nombreDeBulletins -= 1 ;
         }
 
@@ -77,7 +108,7 @@ void TableDecharge::choisirBulletins(ElecteurEngage* &electeur) {
         const double randValeur = (float) BulletinBlancChance(gen) / 100 ; // donne une val entre 0 et 1
 
         if(randValeur <= probaBlanc) {
-            electeur->prendreBulletin(p_tableHachageCandidatsDecharge[-1]);
+            p_electeurOccupant->prendreBulletin(p_tableHachageCandidatsDecharge[-1]);
             p_tableHachageCandidatsDecharge[-1].nombreDeBulletins -= 1 ;
         }
     }
