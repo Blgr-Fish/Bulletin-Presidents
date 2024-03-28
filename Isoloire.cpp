@@ -7,7 +7,7 @@
 
 int Isoloire::p_isoloireId = 0; // représente le nombre total d'isoloires, s'incrémente a chaque instanciation
 
-Isoloire::Isoloire() : p_etat(true),  p_id(p_isoloireId++){}
+Isoloire::Isoloire() : p_etat(true),  p_id(p_isoloireId++){p_electeurOccupant = nullptr ;}
 
 
 void Isoloire::entrerIsoloire(ElecteurEngage* electeur) {

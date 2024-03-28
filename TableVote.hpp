@@ -3,6 +3,7 @@
 
 #include "ElecteurEngage.hpp"
 #include "BulletinsCandiat.hpp"
+#include "ListeElectorale.hpp"
 
 #include <iostream>
 #include <string>
@@ -13,13 +14,13 @@ class TableVote{
 
 public:
     
-    TableVote(ElecteurEngage* president);
+    TableVote(ElecteurEngage* president, const ListeElectorale listeElectorale);
 
     /**
      * Permet à un électeur engagé d'entrer dans la table de vote.
      * \param electeur un pointeur vers l'électeur engagé
      */
-    void entrerTablrVote(ElecteurEngage* electeur);
+    void entrerTableVote(ElecteurEngage* electeur);
 
     /**
      * Permet à l'électeur actuel de sortir de la table de vote vers la file d'attente
@@ -39,12 +40,19 @@ public:
      */
     ElecteurEngage* getOccupant();
 
+    void placerBulletin() ;
+
+    void emarger() ;
+
+    bool estPresentDansEmargement() ;
+
+    void compterBulletins() ;
         
 
 private:
 
     std::stack<BulletinsCandiat> p_urneBulletins ;
-    std::unordered_map<size_t,bool> tableEmargement ;
+    std::unordered_map<size_t,bool> p_tableEmargement ;
     ElecteurEngage* p_electeurOccupant; 
     bool p_etat; 
 

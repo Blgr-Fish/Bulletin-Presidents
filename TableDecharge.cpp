@@ -8,11 +8,13 @@
 
 TableDecharge::TableDecharge(size_t nombreElecteurs) {
  p_nombreElecteurs = nombreElecteurs;
+ p_electeurOccupant = nullptr ;
+ p_etat = true ;
 }
 
 
 void TableDecharge::entrerTableDecharge(ElecteurEngage* electeur) {
-     // on vérifie si l'isoloire est vide avant d'accepter un électeur
+    
     if (estVide()) {
         p_electeurOccupant = electeur;
         p_etat = false; 
