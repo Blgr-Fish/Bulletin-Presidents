@@ -49,6 +49,7 @@ private:
     // Files pour gérer le flux d'électeurs entre les différentes étapes du vote
     std::queue<ElecteurEngage*> p_fileBureauVersTableDecharge; // File entre le bureau et la table de décharge
     std::queue<ElecteurEngage*> p_fileIsoloiresVersTableVote; // File entre les isoloires et la table de vote
+    std::queue<ElecteurEngage*> p_fileTableDechargeVersIsoloires ;
 };
 
 #endif
