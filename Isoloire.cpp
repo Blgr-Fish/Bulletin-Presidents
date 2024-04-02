@@ -59,12 +59,17 @@ void Isoloire::choisirBulletinFinal() {
         BulletinsCandiat bulletinF("Nul",-2,1);
         p_electeurOccupant->prendreBulletinFinal(bulletinF) ;
     } else {
-        std::uniform_int_distribution<size_t> bulletinR(0,p_electeurOccupant->getBulletins().size()-1);
-        
-        // comme c'est une liste, on ne peut pas utiliser les indices.
-        auto it = p_electeurOccupant->getBulletins().begin();
-        std::advance(it, bulletinR(gen));
-        p_electeurOccupant->prendreBulletinFinal(*it);
+        auto bulletins = p_electeurOccupant->getBulletins(); // pour eviter a ecrire std::list etc
+        if (!bulletins.empty()) {
+            std::uniform_int_distribution<size_t> bulletinR(0, bulletins.size() - 1);
+            auto it = bulletins.begin();
+            std::advance(it, bulletinR(gen));     
+
+            p_electeurOccupant->prendreBulletinFinal(*it);
+
+        } else {
+            std::cout << "Erreur : Aucun bulletin disponible pour l'électeur." << std::endl;
+        }
     }
 
 }

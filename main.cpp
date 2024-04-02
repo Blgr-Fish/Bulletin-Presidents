@@ -3,6 +3,7 @@
 #include "Election.hpp"
 #include "ListeElectorale.hpp"
 #include "Isoloire.hpp"
+#include "Bureau.hpp"
 
 #include <cstdlib>
 #include <ctime>
@@ -36,36 +37,22 @@ int main(void)
    };
 
 
-   
-
-   std::cout << "creation de la liste de candidats" << std::endl ;
+   // création de l'élection
    Election electionCandidat("Elections 2024") ;
    electionCandidat.ajouterCandidat(listePersonne[0]);
    electionCandidat.ajouterCandidat(listePersonne[1]);
    electionCandidat.ajouterCandidat(listePersonne[2]);
    electionCandidat.ajouterCandidat(listePersonne[3]);
-   electionCandidat.ajouterCandidat(listePersonne[4]);
-   electionCandidat.ajouterCandidat(listePersonne[5]);
-   electionCandidat.ajouterCandidat(listePersonne[6]);
 
-
-
-   std::cout << "creation de la liste d'electeurs" << std::endl ;
-   ListeElectorale listeElectorale(listePersonne);
-   
-   ElecteurEngage* ele = listeElectorale.rechercherElecteur(*listePersonne[0]);
 
    
+   //ElecteurEngage* ele = listeElectorale.rechercherElecteur(*listePersonne[0]);
+
+   Bureau bureauDeVote(listePersonne,electionCandidat);
 
 
-   // TODO
-   // Code de simulation dans lequel on manipulera les personnes
-   // via des pointeurs sur les éléments du vecteur vp.
-   
 
-   // ici ce n'est pas listePersonne.size() mais 
-   // il faudra ajouter une liste d'electeurs
-
+/*
    std::cout << "creation de la table de decharge" << std::endl ;
 
 
@@ -89,8 +76,8 @@ int main(void)
    isoloire.entrerIsoloire(ele);
    isoloire.choisirBulletinFinal();
    //isoloire.sortirIsoloire();
-   std::cout << " le bulletin final est : " << ele->getBulletinFinal().nomCandidat << std::endl ;
-   
+   std::cout << "le bulletin final est : " << ele->getBulletinFinal().nomCandidat << std::endl ;
+   */
 
    // destruction des personnes
    for (Personne* psn : listePersonne)

@@ -1,7 +1,6 @@
 #include "Bureau.hpp"
 
-
-Bureau::Bureau(std::vector<ElecteurEngage*>& listeElecteurs, Election &election)
+Bureau::Bureau(std::vector<Personne*>& listeElecteurs, Election &election)
         :   p_tableDechargeBureau(listeElecteurs.size()), 
             p_listeElectoraleBureau(listeElecteurs),
             p_listeCandidatsBureau(election) {
@@ -10,7 +9,7 @@ Bureau::Bureau(std::vector<ElecteurEngage*>& listeElecteurs, Election &election)
         //p_tableVoteBureau ;
 
         // initialisation des isoloires
-        for (int i = 0 ; i < Parametrage::NOMBRE_ISOLOIRS ; ++i) {
+        for (size_t i = 0 ; i < (size_t)Parametrage::NOMBRE_ISOLOIRS ; ++i) {
             Isoloire isoloire ;
             p_listeIsoloires.push_back(isoloire);
         }

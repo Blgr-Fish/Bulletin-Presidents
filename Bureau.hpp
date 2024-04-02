@@ -33,6 +33,8 @@ public:
      */
     Bureau(std::vector<ElecteurEngage*>&  listeElecteurs, Election&  election);
 
+    Bureau(std::vector<Personne*>&  listeElecteurs, Election&  election);
+
     /**
      * Initialise le bureau de vote.
      */

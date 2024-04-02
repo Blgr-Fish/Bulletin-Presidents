@@ -49,5 +49,6 @@
         "set": "cpp",
         "map": "cpp"
     },
-    "C_Cpp.errorSquiggles": "enabled"
+    "C_Cpp.errorSquiggles": "enabled",
+    "problems.decorations.enabled": true
 }
