@@ -10,23 +10,24 @@ int Isoloire::p_isoloireId = 0; // représente le nombre total d'isoloires, s'in
 Isoloire::Isoloire() : p_etat(true),  p_id(p_isoloireId++){p_electeurOccupant = nullptr ;}
 
 
-void Isoloire::entrerIsoloire(ElecteurEngage* electeur) {
+void Isoloire::entrerIsoloire(ElecteurEngage* &electeur) {
     
     // on vérifie si l'isoloire est vide avant d'accepter un électeur
     if (estVide()) {
         p_electeurOccupant = electeur;
+        p_electeurOccupant->setNouveauTempsRestant(Parametrage::TEMPS_ISOLOIR);
         p_etat = false; 
-        std::cout << "L'electeur " << p_electeurOccupant->getNom() << " est entre dans l'isoloir " << p_isoloireId << std::endl; 
+        //std::cout << "L'electeur " << electeur->getNom() << " est entre dans l'isoloir " << p_id << std::endl; 
     } else {
-         std::cout << "L'electeur " << p_electeurOccupant->getNom() << " a tente d'entrer dans l'isoloir" << p_isoloireId << " qui est deja en cours d'utilisation." << std::endl; 
+        // std::cout << "L'electeur " << electeur->getNom() << " a tente d'entrer dans l'isoloir" << p_id << " qui est deja en cours d'utilisation." << std::endl; 
     }
 }
 
 
-void Isoloire::sortirIsoloire(std::queue<ElecteurEngage*> file) {
+void Isoloire::sortirIsoloire(std::queue<ElecteurEngage*> &file) {
     // Marche meme si il n'y a pas d'electeurs
     p_etat = true;
-    std::cout << "L'isoloire " << p_isoloireId << " a ete vide."<< std::endl; 
+   //std::cout << "L'isoloire " << p_isoloireId << " a ete vide."<< std::endl; 
 
     // on envois l'occupant dans la file et on le passe a nullptr
     if (p_electeurOccupant != nullptr) {
@@ -41,8 +42,9 @@ bool Isoloire::estVide() {
     return p_etat;
 }
 
+void Isoloire::setEtat(bool etat) { p_etat = etat;}
 
-ElecteurEngage* Isoloire::getOccupant() {
+ElecteurEngage* & Isoloire::getOccupant() {
     return p_electeurOccupant;
 }
 

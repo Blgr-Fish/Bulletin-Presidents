@@ -13,23 +13,24 @@ TableDecharge::TableDecharge(size_t nombreElecteurs) {
 }
 
 
-void TableDecharge::entrerTableDecharge(ElecteurEngage* electeur) {
+void TableDecharge::entrerTableDecharge(ElecteurEngage* &electeur) {
     
     if (estVide()) {
         p_electeurOccupant = electeur;
-        p_etat = false; 
-        std::cout << "L'electeur " << p_electeurOccupant->getNom() << " est entre dans la table de decharge " << std::endl; 
+        p_electeurOccupant->setNouveauTempsRestant(Parametrage::TEMPS_DECHARGE);
+        p_etat = false ;
+        //std::cout << "L'electeur " << electeur->getNom() << " est entre dans la table de decharge " << std::endl; 
     } else {
-         std::cout << "L'electeur " << p_electeurOccupant->getNom() << " a tente d'entrer dans la table de decharge qui est deja en cours d'utilisation." << std::endl; 
+        //std::cout << "L'electeur " << electeur->getNom() << " a tente d'entrer dans la table de decharge qui est deja en cours d'utilisation." << std::endl; 
     }
 }
 
 
-void TableDecharge::sortirTableDecharge(std::queue<ElecteurEngage*> file) {
+void TableDecharge::sortirTableDecharge(std::queue<ElecteurEngage*> &file) {
     
     // Marche meme si il n'y a pas d'electeurs
     p_etat = true;
-    std::cout << "La table de decharge a ete vide."<< std::endl; 
+    //std::cout << "La table de decharge a ete vide."<< std::endl; 
 
     // on envois l'occupant dans la file et on le passe a nullptr
     if (p_electeurOccupant != nullptr) {
@@ -45,6 +46,10 @@ bool TableDecharge::estVide() {
 
 size_t TableDecharge::getTailleListeCandidats() const { return p_tableHachageCandidatsDecharge.size() ;} 
 size_t TableDecharge::getNombreElecteurs() const { return p_nombreElecteurs ;} 
+
+ElecteurEngage* & TableDecharge::getOccupant()  {
+    return p_electeurOccupant;
+}
 
 
 void TableDecharge::ajouterCandidats(Election election) {

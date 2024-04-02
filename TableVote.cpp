@@ -1,7 +1,10 @@
 #include "TableVote.hpp"
+#include "Parametrage.hpp"
 
-TableVote::TableVote(ElecteurEngage* president, const ListeElectorale listeElectorale) {
-    p_presidentTableVote = president ;
+TableVote::TableVote(Personne* president, const ListeElectorale listeElectorale) {
+
+    ElecteurEngage presidentElecteurEngage(*president); // Crée un objet ElecteurEngage à partir de president
+    p_presidentTableVote = &presidentElecteurEngage;
 
     p_etat = true ; // true = vide
     p_electeurOccupant = nullptr ;
@@ -12,19 +15,20 @@ TableVote::TableVote(ElecteurEngage* president, const ListeElectorale listeElect
     }
 }
 
-void TableVote::entrerTableVote(ElecteurEngage* electeur) {
+void TableVote::entrerTableVote(ElecteurEngage* &electeur) {
     if (estVide()) {
         p_electeurOccupant = electeur;
+        p_electeurOccupant->setNouveauTempsRestant(Parametrage::TEMPS_VOTE);
         p_etat = false; 
-        std::cout << "L'electeur " << p_electeurOccupant->getNom() << " est entre dans la table de vote " << std::endl; 
+        //std::cout << "L'electeur " << electeur->getNom() << " est entre dans la table de vote " << std::endl; 
     } else {
-         std::cout << "L'electeur " << p_electeurOccupant->getNom() << " a tente d'entrer dans la table de vote qui est deja en cours d'utilisation." << std::endl; 
+        //std::cout << "L'electeur " << electeur->getNom() << " a tente d'entrer dans la table de vote qui est deja en cours d'utilisation." << std::endl; 
     }
 }
 
 void TableVote::sortirTableVote() {
-     p_etat = true;
-    std::cout << "La table de vote a ete vide."<< std::endl; 
+    p_etat = true;
+    //std::cout << "La table de vote a ete vide."<< std::endl; 
 
     // l'electeur sort et ne va dans aucune file desormais
     if (p_electeurOccupant != nullptr) {
@@ -37,7 +41,7 @@ bool TableVote::estVide() {
     return p_etat;
 }
 
-ElecteurEngage* TableVote::getOccupant() { return p_electeurOccupant ;}
+ElecteurEngage* &TableVote::getOccupant() { return p_electeurOccupant ;}
 
 void TableVote::placerBulletin() {
     p_urneBulletins.push(p_electeurOccupant->getBulletinFinal());

@@ -14,13 +14,13 @@ class TableVote{
 
 public:
     
-    TableVote(ElecteurEngage* president, const ListeElectorale listeElectorale);
+    TableVote(Personne* president, const ListeElectorale listeElectorale);
 
     /**
      * Permet à un électeur engagé d'entrer dans la table de vote.
      * \param electeur un pointeur vers l'électeur engagé
      */
-    void entrerTableVote(ElecteurEngage* electeur);
+    void entrerTableVote(ElecteurEngage* &electeur);
 
     /**
      * Permet à l'électeur actuel de sortir de la table de vote vers la file d'attente
@@ -38,7 +38,7 @@ public:
      * Accesseur.
      * \return l'électeur occupant actuellement la table de vote
      */
-    ElecteurEngage* getOccupant();
+    ElecteurEngage* & getOccupant();
 
     void placerBulletin() ;
 

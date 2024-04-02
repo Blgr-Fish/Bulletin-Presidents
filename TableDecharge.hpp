@@ -31,13 +31,13 @@ public:
      * Permet à un électeur engagé d'entrer dans la table de décgarge
      * \param electeur un pointeur vers l'électeur engagé
      */
-    void entrerTableDecharge(ElecteurEngage* electeur);
+    void entrerTableDecharge(ElecteurEngage* &electeur);
 
     /**
      * Permet à l'électeur actuel de sortir de la table de décharge vers la file d'attente
      * \param file une file d'attente d'électeurs engagés
      */
-    void sortirTableDecharge(std::queue<ElecteurEngage*> file);
+    void sortirTableDecharge(std::queue<ElecteurEngage*> &file);
 
     /**
      * Accesseur.
@@ -61,7 +61,7 @@ public:
      * Accesseur.
      * \return l'électeur occupant actuellement la table de decharge
      */
-    ElecteurEngage* getOccupant();
+    ElecteurEngage* & getOccupant();
 
     /**
      * Ajoute les candidats d'une élection à la table de décharge.

@@ -31,22 +31,25 @@ public:
      * \param listeElecteurs liste des électeurs assignés à ce bureau
      * \param election élection en cours dans ce bureau
      */
-    Bureau(std::vector<ElecteurEngage*>&  listeElecteurs, Election&  election);
 
-    Bureau(std::vector<Personne*>&  listeElecteurs, Election&  election);
+    Bureau(std::vector<Personne*>&  listeElecteurs, Election&  election, Personne* president);
 
-    /**
-     * Initialise le bureau de vote.
-     */
-    void init();
+    
+    ListeElectorale &getListeElectorale() ;
+    Election &getElection() ;
+    TableDecharge &getTableDecharge() ;
+    TableVote &getTableVote() ;
+    Isoloire &getIsoloire(int i) ;
+    int choisirIsoloirDisponible();
+
+    void tests();
 
 private:
     TableDecharge p_tableDechargeBureau; // Table de décharge du bureau
     std::vector<Isoloire> p_listeIsoloires; // Liste des isoloires disponibles dans le bureau
-    //TableVote p_tableVoteBureau; // Table de vote du bureau
-
     ListeElectorale p_listeElectoraleBureau; // Liste des électeurs votant dans ce bureau
     Election p_listeCandidatsBureau; // Liste des candidats de l'élection en cours dans ce bureau
+    TableVote p_tableVoteBureau; // Table de vote du bureau
 
     // Files pour gérer le flux d'électeurs entre les différentes étapes du vote
     std::queue<ElecteurEngage*> p_fileBureauVersTableDecharge; // File entre le bureau et la table de décharge

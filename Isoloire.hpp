@@ -22,13 +22,13 @@ public:
      * Permet à un électeur engagé d'entrer dans l'isoloir.
      * \param electeur un pointeur vers l'électeur engagé
      */
-    void entrerIsoloire(ElecteurEngage* electeur);
+    void entrerIsoloire(ElecteurEngage* &electeur);
 
     /**
      * Permet à l'électeur actuel de sortir de l'isoloir vers la file d'attente
      * \param file une file d'attente d'électeurs engagés
      */
-    void sortirIsoloire(std::queue<ElecteurEngage*> file);
+    void sortirIsoloire(std::queue<ElecteurEngage*> &file);
 
     /**
      * Vérifie si l'isoloir est vide.
@@ -40,13 +40,15 @@ public:
      * Accesseur.
      * \return l'électeur occupant actuellement l'isoloir
      */
-    ElecteurEngage* getOccupant();
+    ElecteurEngage* & getOccupant();
 
     /**
      * Méthode permettant de choisir le bulletin final parmi les bulletins 
      * choisis précédemment. Choisir un bulletin implique de jeter les autres.
      */
     void choisirBulletinFinal();
+
+    void setEtat(bool etat);
 
 private:
     ElecteurEngage* p_electeurOccupant; // Électeur occupant actuellement l'isoloir

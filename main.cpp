@@ -48,9 +48,9 @@ int main(void)
    
    //ElecteurEngage* ele = listeElectorale.rechercherElecteur(*listePersonne[0]);
 
-   Bureau bureauDeVote(listePersonne,electionCandidat);
+   Bureau bureauDeVote(listePersonne,electionCandidat,electionCandidat.getCandidat(0));
 
-
+   bureauDeVote.tests();
 
 /*
    std::cout << "creation de la table de decharge" << std::endl ;
