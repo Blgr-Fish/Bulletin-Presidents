@@ -24,13 +24,13 @@ int main(void)
 
    // création des personnes
    std::vector<Personne*> listePersonne = {
-      new Personne("Benmammar", "adel", 5),
+      new Personne("A", "bic", 7),
+      new Personne("B", "gad", 9),
+      new Personne("C", "ann", 2),
       new Personne("D", "pol", 5),
-      new Personne("E", "lam", 4),
-      new Personne("F", "bul", 6),
+      new Personne("E", "lam", 1),
+      new Personne("F", "bul", 10),
       new Personne("G", "yap", 3),
-      new Personne("Ijja", "ziad", 7),
-      new Personne("Traore", "alfousseny", 2),
       new Personne("X", "nel", 5),
       new Personne("Y", "rik", 2),
       new Personne("Z", "pat", 8)
@@ -48,36 +48,11 @@ int main(void)
    
    //ElecteurEngage* ele = listeElectorale.rechercherElecteur(*listePersonne[0]);
 
-   Bureau bureauDeVote(listePersonne,electionCandidat,electionCandidat.getCandidat(0));
-
-   bureauDeVote.tests();
-
-/*
-   std::cout << "creation de la table de decharge" << std::endl ;
+   Bureau bureauDeVote(listePersonne,electionCandidat,*listePersonne[2],258);
 
 
-   TableDecharge table(listePersonne.size());
-   table.ajouterCandidats(electionCandidat);
-   
-   std::cout << table.getTailleListeCandidats() << std::endl ; 
-   std::cout << table.getNombreElecteurs() << std::endl ;
+   bureauDeVote.main();
 
-   std::cout << "--- TESTS ---" << std::endl ;
-
-   table.entrerTableDecharge(ele);
-   table.choisirBulletins() ;
-   std::cout << "l'electeur a recupere les bulletins suivants :" << std::endl;
-   for (BulletinsCandiat b : ele->getBulletins()) {
-      std::cout << b.nomCandidat << std::endl ;
-   }
-
-   
-   Isoloire isoloire ;
-   isoloire.entrerIsoloire(ele);
-   isoloire.choisirBulletinFinal();
-   //isoloire.sortirIsoloire();
-   std::cout << "le bulletin final est : " << ele->getBulletinFinal().nomCandidat << std::endl ;
-   */
 
    // destruction des personnes
    for (Personne* psn : listePersonne)

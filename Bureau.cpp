@@ -1,6 +1,6 @@
 #include "Bureau.hpp"
 
-Bureau::Bureau(std::vector<Personne*>& listeElecteurs, Election &election, Personne* president)
+Bureau::Bureau(std::vector<Personne*>& listeElecteurs, Election &election, Personne president,int numeroBureau)
         :   p_tableDechargeBureau(listeElecteurs.size()), 
             p_listeElectoraleBureau(listeElecteurs),
             p_listeCandidatsBureau(election),
@@ -13,6 +13,8 @@ Bureau::Bureau(std::vector<Personne*>& listeElecteurs, Election &election, Perso
         }
 
         p_tableDechargeBureau.ajouterCandidats(p_listeCandidatsBureau);
+
+        p_numeroBureau = numeroBureau ;
 }
 
 
@@ -49,19 +51,58 @@ int Bureau::choisirIsoloirDisponible() {
     return -1 ;
 }
 
-void Bureau::tests() {
+void Bureau::main() {
 
-    // entrer les electeurs dans la file 
-    for (ElecteurEngage* electeur :  getListeElectorale().getListeElectorale()) {
-        p_fileBureauVersTableDecharge.push(electeur);
-    }
     int temps = 1 ;
+    size_t indiceElecteur = 0 ;
 
-    while (!p_fileBureauVersTableDecharge.empty() || !p_fileTableDechargeVersIsoloires.empty() || !p_fileIsoloiresVersTableVote.empty() 
-        ||  !getTableVote().estVide() ||  !getTableDecharge().estVide()) {
+    std::cout << "ELECTION '" << p_listeCandidatsBureau.getNom() << "'" << std::endl;
+    for (auto candidat : p_listeCandidatsBureau.getListeCandidats()) {
+        std::cout << "  Candidat n." << candidat->getId() << " : " << candidat->getNom() << " " << candidat->getPrenom() << " " << candidat->getSensiPolitique() << std::endl;
+    }
 
+    std::cout << std::endl;
+
+    std::cout << "BUREAU n." << p_numeroBureau << std::endl ;
+    std::cout << "LISTE ELECTORALE" << std::endl ;
+    for (auto electeur : p_listeElectoraleBureau.getListeElectorale()) {
+        std::cout << "  " << electeur->getNom() << " " << electeur->getPrenom() << " (" << electeur->getId() << ")" << std::endl;
+    }
+
+    std::cout << std::endl;
+
+    std::cout << "PREPARATION DECHARGE" << std::endl ;
+    for (auto candidat : p_listeCandidatsBureau.getListeCandidats()) {
+        std::cout << " " << candidat->getNom() << " " << candidat->getPrenom() << " : " << p_listeElectoraleBureau.getTailleListeElectorale() << " bulletins" << std::endl;
+    }
+
+
+    std::cout << std::endl;
+
+    std::cout << "OUVERTURE BUREAU n." << p_numeroBureau << std::endl ;
+    std::cout << "TMAX = " << Parametrage::TEMPS_MAX <<std::endl ;
+
+    std::cout << std::endl;
+
+    while ((!p_fileBureauVersTableDecharge.empty() || !p_fileTableDechargeVersIsoloires.empty() || !p_fileIsoloiresVersTableVote.empty() 
+        ||  !getTableVote().estVide() ||  !getTableDecharge().estVide()) || temps <= (int) Parametrage::TEMPS_MAX) {
+
+        if(temps == (int) Parametrage::TEMPS_MAX) {
+            std::cout << "\nFERMETURE ENTREE \n" << std::endl ;
+        }
+
+        // augmentatino du temps
         std::cout << "T = " << temps++ << std::endl ;
-        
+
+
+
+        // entrer les electeurs dans la file 
+        if (temps <= (int)Parametrage::TEMPS_MAX && temps % 2 == 1 && indiceElecteur < getListeElectorale().getListeElectorale().size()) {
+            ElecteurEngage* electeurBureau = getListeElectorale().getElecteurIndex(indiceElecteur++);
+            p_fileBureauVersTableDecharge.push(electeurBureau);
+            std::cout << "  ENTREE\n       "<< electeurBureau->getId() << " entre" << std::endl ;
+        }
+
         ElecteurEngage* electeur ;
         // bureau vers table de decharge
         if (!p_fileBureauVersTableDecharge.empty() || !getTableDecharge().estVide()) {
@@ -94,18 +135,9 @@ void Bureau::tests() {
         }
         
         // table de decharge vers isoloires
-
-       /* 
-       bool isoloireEstPlein = false;
-        for ( auto & iso : p_listeIsoloires){
-            if(!iso.estVide()) isoloireEstPlein = true ;
-        }
-        */
-
-
-        if (!p_fileTableDechargeVersIsoloires.empty() ) {
+        int indiceIsoloire = choisirIsoloirDisponible();
+        if (!p_fileTableDechargeVersIsoloires.empty() || !getIsoloire(indiceIsoloire).estVide() ) {
     
-            int indiceIsoloire = choisirIsoloirDisponible();
             if (indiceIsoloire != -1 && getIsoloire(indiceIsoloire).estVide()) {
                 
                 std::cout << "  ISOLOIR" << std::endl ;
@@ -117,23 +149,28 @@ void Bureau::tests() {
                 getIsoloire(indiceIsoloire).choisirBulletinFinal();
                 
                 //std::cout << "\nL'electeur a choisi le bulletin final : " << electeur->getBulletinFinal().nomCandidat<< std::endl;
-            } else {
-                for (int i = 0 ; i < (int)p_listeIsoloires.size() ; ++i) {
+            } 
+                
+            for (int i = 0 ; i < (int)p_listeIsoloires.size() ; ++i) {
+
+                if (i != indiceIsoloire && !getIsoloire(i).estVide()) {
                     getIsoloire(i).getOccupant()->decrementeTempsRestant();
                     
 
                     if (getIsoloire(i).getOccupant()->getTempsRestant() <= 0) {
-                            
+                                
 
-                            if (!getIsoloire(i).estVide()){
+                        if (!getIsoloire(i).estVide()){
                             std::cout << "  ISOLOIR\n       " << getIsoloire(i).getOccupant()->getId() << " prend " << getIsoloire(i).getOccupant()->getBulletinFinal().nomCandidat << std::endl;
-                            std::cout << "  ISOLOIR\n       " << getIsoloire(i).getOccupant()->getId() << " sort" << std::endl ;
-                            }
-                            getIsoloire(i).sortirIsoloire(p_fileIsoloiresVersTableVote);
+                            std::cout << "       " << getIsoloire(i).getOccupant()->getId() << " sort" << std::endl ;
+                        }
+                        getIsoloire(i).sortirIsoloire(p_fileIsoloiresVersTableVote);
                     }
                 }
+                
+            }
 
-            } 
+            
         }
         // isoloires vers table de vote    
         if(!p_fileIsoloiresVersTableVote.empty() || !getTableVote().estVide()) {
@@ -165,7 +202,14 @@ void Bureau::tests() {
         
     }
 
-    std::cout << "c fini" << std::endl ;
+    std::cout << std::endl;
+
+    std::cout << "FERMETURE BUREAU n."<< p_numeroBureau << std::endl ;
+
+    std::cout << std::endl;
+
+    std::cout << "BUREAU n." << p_numeroBureau << " : RESULTATS " << p_listeCandidatsBureau.getNom() << std::endl ;
+    std::cout << "PRESIDENT : " << p_tableVoteBureau.getPresident().getNom() << " " << p_tableVoteBureau.getPresident().getPrenom() << std::endl ;
 
      
 

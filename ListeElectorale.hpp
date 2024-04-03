@@ -68,6 +68,10 @@ public:
      */
     void ajouterElecteur(ElecteurEngage* & electeur);
 
+    ElecteurEngage* getElecteurIndex(size_t index) const ;
+    
+    
+
 private:
     size_t p_TailleListeElectorale; // Taille de la liste électorale
     std::set<ElecteurEngage*, ElecteurEngage::CompAlpha> p_ListeElectorale; // Liste électorale

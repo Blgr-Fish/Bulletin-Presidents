@@ -130,11 +130,11 @@ void TableDecharge::ajouterBulletinBlanc() {
 
     // on vérifie si le bulletin blanc est déjà présent dans la liste de bulletins
     if (p_tableHachageCandidatsDecharge.find(-1) != p_tableHachageCandidatsDecharge.end()) {
-        std::cout << "Le bulletin blanc est déjà présent dans la liste de bulletins. L'opération n'est pas effectuée." << std::endl;
+        //std::cout << "Le bulletin blanc est déjà présent dans la liste de bulletins. L'opération n'est pas effectuée." << std::endl;
     } else {
         // on ajoute le bulletin blanc dans l'unordered_map
         p_tableHachageCandidatsDecharge[-1] = bulletinBlanc;
-        std::cout << "Le bulletin blanc a été ajouté à la liste de bulletins." << std::endl;
+        //std::cout << "Le bulletin blanc a été ajouté à la liste de bulletins." << std::endl;
     }
 }
 

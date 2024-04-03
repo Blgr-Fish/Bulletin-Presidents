@@ -16,6 +16,9 @@ ListeElectorale::ListeElectorale(std::vector<ElecteurEngage*> listeElecteur) {
     }
 }
 
+size_t ListeElectorale::getTailleListeElectorale() const { 
+    return p_ListeElectorale.size();
+} 
 
 
 ElecteurEngage* ListeElectorale::rechercherElecteur(ElecteurEngage& electeur) const{
@@ -48,6 +51,16 @@ ElecteurEngage* ListeElectorale::rechercherElecteur(Personne& personne) const{
     }
 }
 
+
+ElecteurEngage* ListeElectorale::getElecteurIndex(size_t index) const {
+    if (index >= p_ListeElectorale.size()) {
+        return nullptr; // Indice invalide
+    }
+
+    auto it = p_ListeElectorale.begin();
+    std::advance(it, index);
+    return *it;
+}
 
 
 void ListeElectorale::ajouterElecteur(Personne* & personne) {

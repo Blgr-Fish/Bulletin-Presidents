@@ -17,7 +17,7 @@ namespace Parametrage {
     const double PROBABILITE_VOTE_BLANC = 0.35;     // Probabilité de vote blanc
     const double PROBABILITE_VOTE_NUL = 0.15;       // Probabilité de vote nul
     const size_t NOMBRE_ISOLOIRS = 3;               // Nombre d'isoloirs disponibles
-    const size_t DISTANCE_POLITIQUE_MAXIMALE = 5;   // Distance politique maximale entre deux électeurs
+    const size_t DISTANCE_POLITIQUE_MAXIMALE = 3;   // Distance politique maximale entre deux électeurs
 }
 
 #endif

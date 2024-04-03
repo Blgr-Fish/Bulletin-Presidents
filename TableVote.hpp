@@ -14,7 +14,7 @@ class TableVote{
 
 public:
     
-    TableVote(Personne* president, const ListeElectorale listeElectorale);
+    TableVote(const Personne & president, const ListeElectorale listeElectorale);
 
     /**
      * Permet à un électeur engagé d'entrer dans la table de vote.
@@ -47,6 +47,8 @@ public:
     bool estPresentDansEmargement() ;
 
     void compterBulletins() ;
+
+    Personne getPresident();
         
 
 private:
@@ -56,7 +58,7 @@ private:
     ElecteurEngage* p_electeurOccupant; 
     bool p_etat; 
 
-    ElecteurEngage* p_presidentTableVote ;
+    Personne p_presidentTableVote ;
 
 };
 

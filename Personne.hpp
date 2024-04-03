@@ -21,6 +21,8 @@ namespace elections {
       * \param spol   sensibilité politique (entier entre 1 et 10)
       */
       Personne(const std::string& getNom, const std::string& getPrenom, int spol);
+      
+      Personne() = default;
 
       
 

@@ -1,10 +1,10 @@
 #include "TableVote.hpp"
 #include "Parametrage.hpp"
 
-TableVote::TableVote(Personne* president, const ListeElectorale listeElectorale) {
+TableVote::TableVote(const Personne& president, const ListeElectorale listeElectorale) {
 
-    ElecteurEngage presidentElecteurEngage(*president); // Crée un objet ElecteurEngage à partir de president
-    p_presidentTableVote = &presidentElecteurEngage;
+    
+    p_presidentTableVote = president;
 
     p_etat = true ; // true = vide
     p_electeurOccupant = nullptr ;
@@ -53,4 +53,8 @@ void TableVote::emarger() {
 
 bool TableVote::estPresentDansEmargement() { 
     return p_tableEmargement[p_electeurOccupant->getId()];
+}
+
+Personne TableVote::getPresident() {
+    return p_presidentTableVote ;
 }

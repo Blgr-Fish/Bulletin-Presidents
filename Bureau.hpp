@@ -32,7 +32,7 @@ public:
      * \param election élection en cours dans ce bureau
      */
 
-    Bureau(std::vector<Personne*>&  listeElecteurs, Election&  election, Personne* president);
+    Bureau(std::vector<Personne*>&  listeElecteurs, Election&  election, Personne president,int numeroBureau);
 
     
     ListeElectorale &getListeElectorale() ;
@@ -42,7 +42,7 @@ public:
     Isoloire &getIsoloire(int i) ;
     int choisirIsoloirDisponible();
 
-    void tests();
+    void main();
 
 private:
     TableDecharge p_tableDechargeBureau; // Table de décharge du bureau
@@ -55,6 +55,8 @@ private:
     std::queue<ElecteurEngage*> p_fileBureauVersTableDecharge; // File entre le bureau et la table de décharge
     std::queue<ElecteurEngage*> p_fileIsoloiresVersTableVote; // File entre les isoloires et la table de vote
     std::queue<ElecteurEngage*> p_fileTableDechargeVersIsoloires ;
+
+    int p_numeroBureau ;
 };
 
 #endif

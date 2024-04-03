@@ -8,6 +8,7 @@ int Personne::p_electeurId = 0; // représente le nombre total d'electeurs, s'in
                      int spol)
          : p_nom(nom), p_prenom(prenom), p_id(p_electeurId++), p_sensibilitePolitique(spol)
    {}
+   
 
    std::string Personne::getNom() const
    {
