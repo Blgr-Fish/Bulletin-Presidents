@@ -37,6 +37,13 @@ public:
     size_t getTailleListeElectorale() const;
 
     /**
+     * Accesseur..
+     * \param index l'indice de l'electeur dans l'ensemble
+     * \return l'indice de l'electeur
+     */
+    ElecteurEngage* getElecteurIndex(size_t index) const ;
+
+    /**
      * Recherche un électeur engagé dans la liste électorale.
      * \param electeur un électeur engagé à rechercher
      * \return un pointeur vers l'électeur engagé s'il est trouvé, sinon nullptr
@@ -67,10 +74,6 @@ public:
      * \param electeur un pointeur vers un électeur engagé à ajouter
      */
     void ajouterElecteur(ElecteurEngage* & electeur);
-
-    ElecteurEngage* getElecteurIndex(size_t index) const ;
-    
-    
 
 private:
     size_t p_TailleListeElectorale; // Taille de la liste électorale

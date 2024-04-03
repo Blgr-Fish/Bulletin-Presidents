@@ -39,10 +39,10 @@ int main(void)
 
    // création de l'élection
    Election electionCandidat("Elections 2024") ;
-   electionCandidat.ajouterCandidat(listePersonne[0]);
-   electionCandidat.ajouterCandidat(listePersonne[1]);
-   electionCandidat.ajouterCandidat(listePersonne[2]);
-   electionCandidat.ajouterCandidat(listePersonne[3]);
+   electionCandidat.ajouterCandidat(listePersonne[6]);
+   electionCandidat.ajouterCandidat(listePersonne[7]);
+   electionCandidat.ajouterCandidat(listePersonne[8]);
+
 
 
    
@@ -50,9 +50,64 @@ int main(void)
 
    Bureau bureauDeVote(listePersonne,electionCandidat,*listePersonne[2],258);
 
+   int temps = 1 ;
+   int indiceElecteur = 0 ;
 
-   bureauDeVote.main();
 
+   
+
+    std::cout << "ELECTION '" << bureauDeVote.getElection().getNom() << "'" << std::endl;
+    for (auto candidat : bureauDeVote.getElection().getListeCandidats()) {
+        std::cout << "  Candidat n." << candidat->getId() << " : " << candidat->getNom() << " " << candidat->getPrenom() << " " << candidat->getSensiPolitique() << std::endl;
+    }
+
+    std::cout << std::endl;
+
+    std::cout << "BUREAU n." << bureauDeVote.getNumeroBureau() << std::endl ;
+    std::cout << "LISTE ELECTORALE" << std::endl ;
+    for (auto electeur : bureauDeVote.getListeElectorale()   .getListeElectorale()) {
+        std::cout << "  " << electeur->getNom() << " " << electeur->getPrenom() << " (" << electeur->getId() << ")" << std::endl;
+    }
+
+    std::cout << std::endl;
+
+    std::cout << "PREPARATION DECHARGE" << std::endl ;
+    for (auto candidat : bureauDeVote.getElection().getListeCandidats()) {
+        std::cout << " " << candidat->getNom() << " " << candidat->getPrenom() << " : " << bureauDeVote.getListeElectorale()   .getTailleListeElectorale() << " bulletins" << std::endl;
+    }
+
+
+    std::cout << std::endl;
+
+    std::cout << "OUVERTURE BUREAU n." << bureauDeVote.getNumeroBureau() << std::endl ;
+    std::cout << "TMAX = " << Parametrage::TEMPS_MAX <<std::endl ;
+
+    std::cout << std::endl;
+
+
+   while ((!bureauDeVote.getFileBureauTableDecharge().empty() || !bureauDeVote.getFileTableDechargeIsoloires().empty() || !bureauDeVote.getFileIsoloiresTableVote().empty() 
+        ||  !bureauDeVote.getTableVote().estVide() ||  !bureauDeVote.getTableDecharge().estVide()) || temps <= (int) Parametrage::TEMPS_MAX) {
+
+      if(temps == (int) Parametrage::TEMPS_MAX) {
+            std::cout << "\nFERMETURE ENTREE \n" << std::endl ;
+        }
+
+      bureauDeVote.main(temps,indiceElecteur);
+     
+
+     
+
+   }
+
+
+   std::cout << std::endl;
+
+    std::cout << "FERMETURE BUREAU n."<< bureauDeVote.getNumeroBureau()  << std::endl ;
+
+    std::cout << std::endl;
+
+    std::cout << "BUREAU n." << bureauDeVote.getNumeroBureau()  << " : RESULTATS " << bureauDeVote.getElection().getNom() << std::endl ;
+    std::cout << "PRESIDENT : " << bureauDeVote.getTableVote().getPresident().getNom() << " " << bureauDeVote.getTableVote().getPresident().getPrenom() << std::endl ;
 
    // destruction des personnes
    for (Personne* psn : listePersonne)

@@ -28,35 +28,91 @@ class Bureau {
 public:
     /**
      * Constructeur.
-     * \param listeElecteurs liste des électeurs assignés à ce bureau
-     * \param election élection en cours dans ce bureau
+     * \param listeElecteurs Liste des électeurs assignés à ce bureau.
+     * \param election Élection en cours dans ce bureau.
+     * \param president Personne élue présidente du bureau.
+     * \param numeroBureau Numéro du bureau.
      */
+    Bureau(std::vector<Personne*>& listeElecteurs, Election& election, Personne president, int numeroBureau);
 
-    Bureau(std::vector<Personne*>&  listeElecteurs, Election&  election, Personne president,int numeroBureau);
+    /**
+     * Accesseur.
+     * \return la liste électorale.
+     */
+    ListeElectorale& getListeElectorale();
 
-    
-    ListeElectorale &getListeElectorale() ;
-    Election &getElection() ;
-    TableDecharge &getTableDecharge() ;
-    TableVote &getTableVote() ;
-    Isoloire &getIsoloire(int i) ;
+    /**
+     * Accesseur.
+     * \return l'élection en cours dans ce bureau.
+     */
+    Election& getElection();
+
+    /**
+     * Accesseur.
+     * \return la table de décharge.
+     */
+    TableDecharge& getTableDecharge();
+
+    /**
+     * Accesseur.
+     * \return la table de vote.
+     */
+    TableVote& getTableVote();
+
+    /**
+     * Accesseur.
+     * \param i Indice de l'isoloir.
+     * \return l'isoloir à l'indice spécifié.
+     */
+    Isoloire& getIsoloire(int i);
+
+    /**
+     * Accesseur.
+     * \return le numéro du bureau.
+     */
+    int getNumeroBureau();
+
+    /**
+     * Accesseur.
+     * \return la file entre le bureau et la table de décharge.
+     */
+    std::queue<ElecteurEngage*>& getFileBureauTableDecharge();
+
+    /**
+     * Accesseur.
+     * \return la file entre la table de décharge et les isoloirs.
+     */
+    std::queue<ElecteurEngage*>& getFileTableDechargeIsoloires();
+
+    /**
+     * Accesseur.
+     * \return la file entre les isoloirs et la table de vote.
+     */
+    std::queue<ElecteurEngage*>& getFileIsoloiresTableVote();
+
+    /**
+     * Méthode pour choisir un isoloir disponible.
+     * \return indice de l'isoloir disponible, -1 si aucun isoloir n'est disponible.
+     */
     int choisirIsoloirDisponible();
 
-    void main();
+    /**
+     * Méthode principale pour la gestion du bureau de vote.
+     * \param temps Temps continu
+     * \param indiceElecteur Indice de l'électeur pour entrer dans le bureau.
+     */
+    void main(int& temps, int& indiceElecteur);
 
 private:
-    TableDecharge p_tableDechargeBureau; // Table de décharge du bureau
-    std::vector<Isoloire> p_listeIsoloires; // Liste des isoloires disponibles dans le bureau
-    ListeElectorale p_listeElectoraleBureau; // Liste des électeurs votant dans ce bureau
-    Election p_listeCandidatsBureau; // Liste des candidats de l'élection en cours dans ce bureau
-    TableVote p_tableVoteBureau; // Table de vote du bureau
-
-    // Files pour gérer le flux d'électeurs entre les différentes étapes du vote
-    std::queue<ElecteurEngage*> p_fileBureauVersTableDecharge; // File entre le bureau et la table de décharge
-    std::queue<ElecteurEngage*> p_fileIsoloiresVersTableVote; // File entre les isoloires et la table de vote
-    std::queue<ElecteurEngage*> p_fileTableDechargeVersIsoloires ;
-
-    int p_numeroBureau ;
+    TableDecharge p_tableDechargeBureau;
+    std::vector<Isoloire> p_listeIsoloires;
+    ListeElectorale p_listeElectoraleBureau;
+    Election p_listeCandidatsBureau;
+    TableVote p_tableVoteBureau;
+    std::queue<ElecteurEngage*> p_fileBureauVersTableDecharge;
+    std::queue<ElecteurEngage*> p_fileTableDechargeVersIsoloires;
+    std::queue<ElecteurEngage*> p_fileIsoloiresVersTableVote;
+    int p_numeroBureau;
 };
 
 #endif
