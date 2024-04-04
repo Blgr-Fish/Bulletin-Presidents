@@ -13,22 +13,22 @@
 /**
  * Classe représentant la table de vote où les électeurs engagés déposent leur vote et émargent.
  */
-class TableVote {
+class TableVote
+{
 
 public:
-    
     /**
      * Constructeur.
      * \param president Personne élue présidente du bureau.
      * \param listeElectorale Liste électorale pour la table de vote.
      */
-    TableVote(const Personne& president, const ListeElectorale listeElectorale);
+    TableVote(const Personne &president, const ListeElectorale listeElectorale);
 
     /**
      * Permet à un électeur engagé d'entrer dans la table de vote.
      * \param electeur Un pointeur vers l'électeur engagé.
      */
-    void entrerTableVote(ElecteurEngage* &electeur);
+    void entrerTableVote(ElecteurEngage *&electeur);
 
     /**
      * Permet à l'électeur actuel de sortir de la table de vote vers la file d'attente.
@@ -46,7 +46,7 @@ public:
      * Accesseur.
      * \return l'électeur occupant actuellement la table de vote.
      */
-    ElecteurEngage* & getOccupant();
+    ElecteurEngage *&getOccupant();
 
     /**
      * Place le bulletin de vote dans l'urne.
@@ -81,16 +81,12 @@ public:
      */
     std::stack<BulletinsCandiat> &getUrneBulletins();
 
-
-
 private:
-
-    std::stack<BulletinsCandiat> p_urneBulletins; // Urne contenant les bulletins de vote
-    std::unordered_map<size_t,bool> p_tableEmargement; // Liste d'émargement
-    ElecteurEngage* p_electeurOccupant; // Électeur actuellement dans la table de vote
-    bool p_etat; // État de la table de vote (vide ou non)
-    Personne p_presidentTableVote; // Président associé à la table de vote
-
+    std::stack<BulletinsCandiat> p_urneBulletins;       // Urne contenant les bulletins de vote
+    std::unordered_map<size_t, bool> p_tableEmargement; // Liste d'émargement
+    ElecteurEngage *p_electeurOccupant;                 // Électeur actuellement dans la table de vote
+    bool p_etat;                                        // État de la table de vote (vide ou non)
+    Personne p_presidentTableVote;                      // Président associé à la table de vote
 };
 
 #endif

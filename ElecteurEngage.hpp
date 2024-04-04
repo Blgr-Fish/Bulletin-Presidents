@@ -10,23 +10,23 @@
 using namespace elections;
 
 /**
- * Un électeur engagé représente une personne pouvant voter, qui a commencé  
+ * Un électeur engagé représente une personne pouvant voter, qui a commencé
  * le processus de vote, c'est-à-dire choisir des bulletins de vote, etc.
  *
  * C'est une sous-classe de Personne.
  *
- * L'électeur engagé possède des attributs supplémentaires tels que le temps 
+ * L'électeur engagé possède des attributs supplémentaires tels que le temps
  * restant pour effectuer son action, les bulletins qu'il a choisis lors de la table
- * de décharge, et enfin le bulletin final qu'il a gardé. 
+ * de décharge, et enfin le bulletin final qu'il a gardé.
  */
-class ElecteurEngage : public Personne {
+class ElecteurEngage : public Personne
+{
 public:
-
     /**
      * Constructeur.
      * \param personne une personne dont les attributs sont copiés pour créer un électeur engagé
      */
-    ElecteurEngage(const Personne& personne);
+    ElecteurEngage(const Personne &personne);
 
     /**
      * Accesseur.
@@ -70,9 +70,9 @@ public:
     BulletinsCandiat getBulletinFinal() const;
 
 private:
-    int p_TempRestant; // Temps restant pour effectuer l'action (isoloir, table de décharge, etc)
+    int p_TempRestant;                              // Temps restant pour effectuer l'action (isoloir, table de décharge, etc)
     std::list<BulletinsCandiat> p_BulletinsChoisis; // Liste des bulletins choisis
-    BulletinsCandiat p_BulletinFinal; // Bulletin final choisi
+    BulletinsCandiat p_BulletinFinal;               // Bulletin final choisi
 };
 
 #endif

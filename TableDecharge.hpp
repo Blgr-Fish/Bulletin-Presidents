@@ -17,10 +17,10 @@ using namespace elections;
  * ainsi que d'un entier représentant le nombre d'électeurs pour attribuer le
  * bon nombre de bulletins aux candidats.
  */
-class TableDecharge {
+class TableDecharge
+{
 
 public:
-
     /**
      * Constructeur.
      * \param nombreElecteurs nombre d'électeurs pour la table de décharge
@@ -31,13 +31,13 @@ public:
      * Permet à un électeur engagé d'entrer dans la table de décgarge
      * \param electeur un pointeur vers l'électeur engagé
      */
-    void entrerTableDecharge(ElecteurEngage* &electeur);
+    void entrerTableDecharge(ElecteurEngage *&electeur);
 
     /**
      * Permet à l'électeur actuel de sortir de la table de décharge vers la file d'attente
      * \param file une file d'attente d'électeurs engagés
      */
-    void sortirTableDecharge(std::queue<ElecteurEngage*> &file);
+    void sortirTableDecharge(std::queue<ElecteurEngage *> &file);
 
     /**
      * Accesseur.
@@ -61,7 +61,7 @@ public:
      * Accesseur.
      * \return l'électeur occupant actuellement la table de decharge
      */
-    ElecteurEngage* & getOccupant();
+    ElecteurEngage *&getOccupant();
 
     /**
      * Ajoute les candidats d'une élection à la table de décharge.
@@ -75,10 +75,10 @@ public:
     void choisirBulletins();
 
 private:
-    size_t p_nombreElecteurs; // Nombre d'électeurs pour la table de décharge
+    size_t p_nombreElecteurs;                                           // Nombre d'électeurs pour la table de décharge
     std::map<size_t, BulletinsCandiat> p_tableHachageCandidatsDecharge; // Liste des bulletins de candidats
-    bool p_etat; // Détermine si un électeur est dans la table de décharge
-    ElecteurEngage* p_electeurOccupant;
+    bool p_etat;                                                        // Détermine si un électeur est dans la table de décharge
+    ElecteurEngage *p_electeurOccupant;
 
     /**
      * Ajoute un bulletin blanc à la table de décharge.

@@ -7,10 +7,11 @@
 
 /**
  * Sert à comptabiliser le nombre de votes
-*/
-struct VoteCandidat {
-    std::string candidat ;
-    int occurence ;
+ */
+struct VoteCandidat
+{
+    std::string candidat;
+    int occurence;
 };
 
 #endif

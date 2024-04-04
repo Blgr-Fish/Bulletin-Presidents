@@ -104,7 +104,39 @@ public:
      */
     void main(int& temps, int& indiceElecteur);
 
+    /**
+     * Méthode permettant le comptage des votes.
+     * \return un dictionnaire liant les indices des candidats a leur nom + occurence de vote
+     */
     std::map<int,VoteCandidat> tirageVotes();
+
+    /**
+     * Méthode permettant l'entrée dans le bureau d'un electeur
+     * \param temps Temps continu
+     * \param indiceElecteur Indice de l'électeur pour entrer dans le bureau.
+     */
+    void entrerElecteursDansFile(int temps, int & indiceElecteur) ;
+
+    /**
+     * Méthode permettant l'insertion d'un electeur dans la table de décharge
+     * ainsi que du fait de choisir les bulletins
+     * \param electeur l'electeur entrant ou tentant d'entrer
+     */
+    void traiterTableDecharge(ElecteurEngage * &electeur) ;
+
+    /**
+     * Méthode permettant l'insertion d'un electeur dans l'un des isoloirs
+     * ainsi que du fait de choisir son bulletin final
+     * \param electeur l'electeur entrant ou tentant d'entrer
+     */
+    void traiterIsoloires(ElecteurEngage* &electeur) ;
+
+    /**
+     * Méthode permettant l'insertion d'un electeur dans la table de vote 
+     * ainsi que du fait d'emarger et de déposer son vote
+     * \param electeur l'electeur entrant ou tentant d'entrer
+     */
+    void traiterTableVote(ElecteurEngage* &electeur);
 
 private:
     TableDecharge p_tableDechargeBureau;
