@@ -19,6 +19,7 @@ struct BulletinsCandiat {
     size_t nombreDeBulletins; // Nombre de bulletins restants pour ce candidat
     size_t candidatSpol; // Sensibilité politique du candidat
 
+
     /**
      * Constructeur prenant une personne (candidat) et un nombre de bulletins.
      * \param candidat la personne (candidat) associée au bulletin
@@ -27,6 +28,7 @@ struct BulletinsCandiat {
     BulletinsCandiat(Personne& candidat, size_t& nombreDeBulletins)
         : nomCandidat(candidat.getNom()), idCandidat(candidat.getId()), nombreDeBulletins(nombreDeBulletins) {
         candidatSpol = candidat.getSensiPolitique();
+  
     }
 
     /**

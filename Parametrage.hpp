@@ -16,6 +16,7 @@ namespace Parametrage {
     const size_t TEMPS_VOTE = 4;                    // Temps maximum pour voter
     const double PROBABILITE_VOTE_BLANC = 0.35;     // Probabilité de vote blanc
     const double PROBABILITE_VOTE_NUL = 0.15;       // Probabilité de vote nul
+    const double PROBABILITE_ABSTENTION = 0.28 ;    // Probabilité de ne pas entrer dans le bureau
     const size_t NOMBRE_ISOLOIRS = 3;               // Nombre d'isoloirs disponibles
     const size_t DISTANCE_POLITIQUE_MAXIMALE = 3;   // Distance politique maximale entre deux électeurs
 }

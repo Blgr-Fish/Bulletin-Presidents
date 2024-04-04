@@ -9,11 +9,8 @@ int ElecteurEngage::getTempsRestant() {
 }
 
 void ElecteurEngage::decrementeTempsRestant() {
-    if (p_TempRestant > 0) {
-        p_TempRestant--;
-    }
+        p_TempRestant--; 
 }
-
 
 void ElecteurEngage::setNouveauTempsRestant(int nouveauTemps) {
     p_TempRestant = nouveauTemps;

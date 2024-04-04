@@ -75,6 +75,14 @@ public:
      */
     Personne getPresident();
 
+    /**
+     * Accesseur.
+     * \return l'urne contenant les votes.
+     */
+    std::stack<BulletinsCandiat> &getUrneBulletins();
+
+
+
 private:
 
     std::stack<BulletinsCandiat> p_urneBulletins; // Urne contenant les bulletins de vote

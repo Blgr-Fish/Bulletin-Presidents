@@ -7,6 +7,7 @@
 #include "ElecteurEngage.hpp"
 #include "ListeElectorale.hpp"
 #include "Parametrage.hpp"
+#include "VoteCandidat.hpp"
 
 #include <iostream>
 #include <string>
@@ -102,6 +103,8 @@ public:
      * \param indiceElecteur Indice de l'électeur pour entrer dans le bureau.
      */
     void main(int& temps, int& indiceElecteur);
+
+    std::map<int,VoteCandidat> tirageVotes();
 
 private:
     TableDecharge p_tableDechargeBureau;

@@ -58,3 +58,5 @@ bool TableVote::estPresentDansEmargement() {
 Personne TableVote::getPresident() {
     return p_presidentTableVote ;
 }
+
+std::stack<BulletinsCandiat> &TableVote::getUrneBulletins() {return p_urneBulletins ;} 
