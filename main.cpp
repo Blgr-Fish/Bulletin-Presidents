@@ -61,12 +61,6 @@ int main(void)
 
    int temps = 1 ;
    int indiceElecteur = 0 ;
-   
-
-   bool IsoloireVide = true ;
-
-
-   
 
     std::cout << "ELECTION '" << bureauDeVote.getElection().getNom() << "'" << std::endl;
     for (auto candidat : bureauDeVote.getElection().getListeCandidats()) {
@@ -100,18 +94,10 @@ int main(void)
 
 
     while ((!bureauDeVote.getFileBureauTableDecharge().empty() || !bureauDeVote.getFileTableDechargeIsoloires().empty() || !bureauDeVote.getFileIsoloiresTableVote().empty() 
-        ||  !bureauDeVote.getTableVote().estVide() ||  !bureauDeVote.getTableDecharge().estVide()) || IsoloireVide == false || temps <= (int) Parametrage::TEMPS_MAX) {
+        ||  !bureauDeVote.getTableVote().estVide() ||  !bureauDeVote.getTableDecharge().estVide()) || temps <= (int) Parametrage::TEMPS_MAX) {
 
         if(temps == (int) Parametrage::TEMPS_MAX) {
                 std::cout << "\nFERMETURE ENTREE \n" << std::endl ;
-        }
-
-        // pour s'assurer de bien vider les isoloires
-        IsoloireVide = true ;
-        for (int i = 0 ; i< (int)Parametrage::NOMBRE_ISOLOIRS ; ++i) {
-            if (!bureauDeVote.getIsoloire(i).estVide()) {
-                IsoloireVide = false ;
-            }
         }
 
         bureauDeVote.main(temps,indiceElecteur);
