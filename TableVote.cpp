@@ -71,3 +71,4 @@ Personne TableVote::getPresident()
 }
 
 std::stack<BulletinsCandiat> &TableVote::getUrneBulletins() { return p_urneBulletins; }
+

@@ -36,6 +36,7 @@ int main(void)
       new Personne("Z", "pat", 8)
    };
 
+    // les candiats qui vont être convertis en élécteurs
    std::vector<Personne*> listeElecteur = {
       listePersonne[0],
       listePersonne[1],
@@ -51,8 +52,6 @@ int main(void)
    electionCandidat.ajouterCandidat(listePersonne[6]);
    electionCandidat.ajouterCandidat(listePersonne[7]);
    electionCandidat.ajouterCandidat(listePersonne[8]);
-
-
 
    
    //ElecteurEngage* ele = listeElectorale.rechercherElecteur(*listePersonne[0]);
@@ -117,7 +116,8 @@ int main(void)
     std::cout << "  participation : " << (( (float)bureauDeVote.getTableVote().getUrneBulletins().size() /(float)bureauDeVote.getListeElectorale().getTailleListeElectorale()) ) *100 << "%" << std::endl;
     std::cout << "  abstention : " << ( 1. -( (float)bureauDeVote.getTableVote().getUrneBulletins().size() /(float)bureauDeVote.getListeElectorale().getTailleListeElectorale()) ) *100 << "%" << std::endl;
 
-   
+
+    // affichage des votes
     std::map<int,VoteCandidat> comptage = bureauDeVote.tirageVotes();
     for (const auto& k : comptage) {
         const VoteCandidat& vote = k.second; // Valeur

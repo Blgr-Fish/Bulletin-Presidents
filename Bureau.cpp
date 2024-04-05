@@ -77,6 +77,7 @@ void Bureau::main(int & temps, int & indiceElecteur) {
         std::random_device seed;
         std::mt19937 gen(seed());
 
+        // pour l'abstention
         std::uniform_int_distribution<size_t> AbstentionChance(0, 100);
         const double randValeur = (float) AbstentionChance(gen) / 100 ; // donne une val entre 0 et 1
         ElecteurEngage* electeurBureau = getListeElectorale().getElecteurIndex(indiceElecteur++);
@@ -204,8 +205,6 @@ std::map<int,VoteCandidat> Bureau::tirageVotes() {
     int id = getTableVote().getUrneBulletins().top().idCandidat;
     
     comptage[id].occurence++;
-
-
     getTableVote().getUrneBulletins().pop();
 }
 
