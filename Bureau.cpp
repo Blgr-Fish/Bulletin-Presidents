@@ -84,8 +84,8 @@ void Bureau::entrerElecteursDansFile(int temps, int &indiceElecteur)
         }
         else
         {
-            std::cout << electeurBureau->getId() << " entre pas " << std::endl;
-            ;
+            std::cout << "  ENTREE\n       " << electeurBureau->getId() << " s'abtient " << std::endl;
+            
         }
     }
 }
