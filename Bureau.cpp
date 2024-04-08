@@ -61,7 +61,7 @@ int Bureau::choisirIsoloirDisponible() {
         }
     } 
     
-    return 0 ;
+    return -1 ;
 }
 
 void Bureau::entrerElecteursDansFile(int temps, int &indiceElecteur)
