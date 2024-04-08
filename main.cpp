@@ -126,12 +126,15 @@ int main(void)
     std::cout << "  participation : " << (( (float)bureauDeVote.getTableVote().getUrneBulletins().size() /(float)bureauDeVote.getListeElectorale().getTailleListeElectorale()) ) *100 << "%" << std::endl;
     std::cout << "  abstention : " << ( 1. -( (float)bureauDeVote.getTableVote().getUrneBulletins().size() /(float)bureauDeVote.getListeElectorale().getTailleListeElectorale()) ) *100 << "%" << std::endl;
 
+    // comme on va dépiler l'urne, on va perdre sa taille, donc on la stock
+    float nbrVotant = (float)bureauDeVote.getTableVote().getUrneBulletins().size() ;
 
     // affichage des votes
     std::map<int,VoteCandidat> comptage = bureauDeVote.tirageVotes();
     for (const auto& k : comptage) {
         const VoteCandidat& vote = k.second; // Valeur
-        std::cout << "  " << vote.candidat << " : " << vote.occurence << std::endl;
+        float pourcentage = (float)vote.occurence / nbrVotant ;
+        std::cout << "  " << vote.candidat << " : " << vote.occurence << " (" << pourcentage * 100<< "%)" << std::endl;
     }
 
     

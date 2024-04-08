@@ -109,6 +109,18 @@ void TableDecharge::choisirBulletins()
         std::random_device seed;
         std::mt19937 gen(seed());
 
+        // va donner un size_t aleatoire entre 2 et tailleListe
+        std::uniform_int_distribution<size_t> distance(2, tailleListe);
+        size_t nombreBulletinsAChoisir = distance(gen);
+
+        // on mélange la liste et on recupere les nombreBulletinsAChoisir premiers elements
+        std::shuffle(tempListeCandidats.begin(), tempListeCandidats.end(), gen);
+
+        for (size_t i = 0; i < nombreBulletinsAChoisir; ++i)
+        {
+            p_electeurOccupant->prendreBulletin(tempListeCandidats[i]);
+            p_tableHachageCandidatsDecharge[tempListeCandidats[i].idCandidat].nombreDeBulletins -= 1;
+        }
 
         std::uniform_int_distribution<size_t> BulletinBlancChance(0, 100);
         const double randValeur = (float)BulletinBlancChance(gen) / 100; // donne une val entre 0 et 1
@@ -117,19 +129,6 @@ void TableDecharge::choisirBulletins()
         {
             p_electeurOccupant->prendreBulletin(p_tableHachageCandidatsDecharge[-1]);
             p_tableHachageCandidatsDecharge[-1].nombreDeBulletins -= 1;
-        } else {
-            // va donner un size_t aleatoire entre 2 et tailleListe
-            std::uniform_int_distribution<size_t> distance(2, tailleListe);
-            size_t nombreBulletinsAChoisir = distance(gen);
-
-            // on mélange la liste et on recupere les nombreBulletinsAChoisir premiers elements
-            std::shuffle(tempListeCandidats.begin(), tempListeCandidats.end(), gen);
-
-            for (size_t i = 0; i < nombreBulletinsAChoisir; ++i)
-            {
-                p_electeurOccupant->prendreBulletin(tempListeCandidats[i]);
-                p_tableHachageCandidatsDecharge[tempListeCandidats[i].idCandidat].nombreDeBulletins -= 1;
-            }
         }
     }
 }
