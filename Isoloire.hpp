@@ -18,6 +18,7 @@ public:
      * Constructeur.
      */
     Isoloire();
+    
 
     /**
      * Permet à un électeur engagé d'entrer dans l'isoloir.

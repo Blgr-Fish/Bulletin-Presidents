@@ -102,7 +102,7 @@ public:
      * \param temps Temps continu
      * \param indiceElecteur Indice de l'électeur pour entrer dans le bureau.
      */
-    void main(int& temps, int& indiceElecteur);
+    void traitement(int& temps, int& indiceElecteur);
 
     /**
      * Méthode permettant le comptage des votes.
@@ -137,6 +137,12 @@ public:
      * \param electeur l'electeur entrant ou tentant d'entrer
      */
     void traiterTableVote(ElecteurEngage* &electeur);
+
+
+    /**
+     * Méthode permettant la simulation complète plus l'affichage.
+     */
+    void simulation();
 
 private:
     TableDecharge p_tableDechargeBureau;

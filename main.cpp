@@ -57,88 +57,10 @@ int main(void)
    //ElecteurEngage* ele = listeElectorale.rechercherElecteur(*listePersonne[0]);
 
    Bureau bureauDeVote(listeElecteur,electionCandidat,*listePersonne[2],258);
+   //Bureau bureauDeVote2(listeElecteur,electionCandidat,*listePersonne[3],512);
 
-   int temps = 1 ;
-   int indiceElecteur = 0 ;
-   bool IsoloireVide = true ;
-
-    std::cout << "ELECTION '" << bureauDeVote.getElection().getNom() << "'" << std::endl;
-    for (auto candidat : bureauDeVote.getElection().getListeCandidats()) {
-        std::cout << "  Candidat n." << candidat->getId() << " : " << candidat->getNom() << " " << candidat->getPrenom() << " " << candidat->getSensiPolitique() << std::endl;
-    }
-
-    std::cout << std::endl;
-
-    std::cout << "BUREAU n." << bureauDeVote.getNumeroBureau() << std::endl ;
-    std::cout << "LISTE ELECTORALE" << std::endl ;
-    for (auto electeur : bureauDeVote.getListeElectorale()   .getListeElectorale()) {
-        std::cout << "  " << electeur->getNom() << " " << electeur->getPrenom() << " (" << electeur->getId() << ")" << std::endl;
-    }
-
-    std::cout << std::endl;
-
-    std::cout << "PREPARATION DECHARGE" << std::endl ;
-    for (auto candidat : bureauDeVote.getElection().getListeCandidats()) {
-        std::cout << " " << candidat->getNom() << " " << candidat->getPrenom() << " : " << bureauDeVote.getListeElectorale()   .getTailleListeElectorale() << " bulletins" << std::endl;
-    }
-
-
-    std::cout << std::endl;
-
-    std::cout << "OUVERTURE BUREAU n." << bureauDeVote.getNumeroBureau() << std::endl ;
-    std::cout << "TMAX = " << Parametrage::TEMPS_MAX <<std::endl ;
-
-    std::cout << std::endl;
-
-    
-
-
-    while ((!bureauDeVote.getFileBureauTableDecharge().empty() || !bureauDeVote.getFileTableDechargeIsoloires().empty() || !bureauDeVote.getFileIsoloiresTableVote().empty() 
-        ||  !bureauDeVote.getTableVote().estVide() ||  !bureauDeVote.getTableDecharge().estVide()) || IsoloireVide == false || temps <= (int) Parametrage::TEMPS_MAX) {
-
-        if(temps == (int) Parametrage::TEMPS_MAX) {
-                std::cout << "\nFERMETURE ENTREE \n" << std::endl ;
-        }
-
-        // pour s'assurer de bien vider les isoloires
-        IsoloireVide = true ;
-        for (int i = 0 ; i< (int)Parametrage::NOMBRE_ISOLOIRS ; ++i) {
-            if (!bureauDeVote.getIsoloire(i).estVide()) {
-                IsoloireVide = false ;
-            }
-        }
-
-        bureauDeVote.main(temps,indiceElecteur);
-    }
-
-
-
-    std::cout << std::endl;
-
-    std::cout << "FERMETURE BUREAU n."<< bureauDeVote.getNumeroBureau()  << std::endl ;
-
-    std::cout << std::endl;
-
-    std::cout << "BUREAU n." << bureauDeVote.getNumeroBureau()  << " : RESULTATS " << bureauDeVote.getElection().getNom() << std::endl ;
-    std::cout << "PRESIDENT : " << bureauDeVote.getTableVote().getPresident().getNom() << " " << bureauDeVote.getTableVote().getPresident().getPrenom() << std::endl ;
-    std::cout << "  nb electeurs : " << bureauDeVote.getListeElectorale().getTailleListeElectorale() << std::endl ;
-    std::cout << "  nb votes : " << bureauDeVote.getTableVote().getUrneBulletins().size() << std::endl ;
-    std::cout << "  participation : " << (( (float)bureauDeVote.getTableVote().getUrneBulletins().size() /(float)bureauDeVote.getListeElectorale().getTailleListeElectorale()) ) *100 << "%" << std::endl;
-    std::cout << "  abstention : " << ( 1. -( (float)bureauDeVote.getTableVote().getUrneBulletins().size() /(float)bureauDeVote.getListeElectorale().getTailleListeElectorale()) ) *100 << "%" << std::endl;
-
-    // comme on va dépiler l'urne, on va perdre sa taille, donc on la stock
-    float nbrVotant = (float)bureauDeVote.getTableVote().getUrneBulletins().size() ;
-
-    // affichage des votes
-    std::map<int,VoteCandidat> comptage = bureauDeVote.tirageVotes();
-    for (const auto& k : comptage) {
-        const VoteCandidat& vote = k.second; // Valeur
-        float pourcentage = (float)vote.occurence / nbrVotant ;
-        std::cout << "  " << vote.candidat << " : " << vote.occurence << " (" << pourcentage * 100<< "%)" << std::endl;
-    }
-
-    
-
+   bureauDeVote.simulation();
+   //bureauDeVote2.simulation();
 
 
    // destruction des personnes

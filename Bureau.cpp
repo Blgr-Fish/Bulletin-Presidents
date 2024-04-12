@@ -212,8 +212,28 @@ void Bureau::traiterTableVote(ElecteurEngage *&electeur)
     }
 }
 
+std::map<int,VoteCandidat> Bureau::tirageVotes() {
 
-void Bureau::main(int & temps, int & indiceElecteur) {
+    std::map<int,VoteCandidat> comptage ;
+
+
+    for (auto a : getElection().getListeCandidats()){
+        comptage.insert(std::make_pair(a->getId(), VoteCandidat{a->getNom()+" "+a->getPrenom(), 0}));
+    }
+    comptage.insert(std::make_pair(-1, VoteCandidat{"blanc", 0}));
+    comptage.insert(std::make_pair(-2, VoteCandidat{"nul", 0}));
+
+    while (!getTableVote().getUrneBulletins().empty()) {
+    int id = getTableVote().getUrneBulletins().top().idCandidat;
+    
+    comptage[id].occurence++;
+    getTableVote().getUrneBulletins().pop();
+}
+
+    return comptage ;
+}
+
+void Bureau::traitement(int & temps, int & indiceElecteur) {
 
     ElecteurEngage *electeur;
 
@@ -236,23 +256,71 @@ void Bureau::main(int & temps, int & indiceElecteur) {
 }
 
 
-std::map<int,VoteCandidat> Bureau::tirageVotes() {
+void Bureau::simulation() {
+    int temps = 1 ;
+    int indiceElecteur = 0 ;
+    bool IsoloireVide = true ;
 
-    std::map<int,VoteCandidat> comptage ;
-
-
-    for (auto a : getElection().getListeCandidats()){
-        comptage.insert(std::make_pair(a->getId(), VoteCandidat{a->getNom()+" "+a->getPrenom(), 0}));
+    std::cout << "ELECTION '" << getElection().getNom() << "'" << std::endl;
+    for (auto candidat : getElection().getListeCandidats()) {
+        std::cout << "  Candidat n." << candidat->getId() << " : " << candidat->getNom() << " " << candidat->getPrenom() << " " << candidat->getSensiPolitique() << std::endl;
     }
-    comptage.insert(std::make_pair(-1, VoteCandidat{"blanc", 0}));
-    comptage.insert(std::make_pair(-2, VoteCandidat{"nul", 0}));
 
-    while (!getTableVote().getUrneBulletins().empty()) {
-    int id = getTableVote().getUrneBulletins().top().idCandidat;
-    
-    comptage[id].occurence++;
-    getTableVote().getUrneBulletins().pop();
+    std::cout << std::endl;
+    std::cout << "BUREAU n." << getNumeroBureau() << std::endl ;
+    std::cout << "LISTE ELECTORALE" << std::endl ;
+
+    for (auto electeur : getListeElectorale()   .getListeElectorale()) {
+        std::cout << "  " << electeur->getNom() << " " << electeur->getPrenom() << " (" << electeur->getId() << ")" << std::endl;
+    }
+
+    std::cout << std::endl;
+    std::cout << "PREPARATION DECHARGE" << std::endl ;
+
+    for (auto candidat : getElection().getListeCandidats()) {
+        std::cout << " " << candidat->getNom() << " " << candidat->getPrenom() << " : " << getListeElectorale()   .getTailleListeElectorale() << " bulletins" << std::endl;
+    }
+
+    std::cout << std::endl;
+    std::cout << "OUVERTURE BUREAU n." << getNumeroBureau() << std::endl ;
+    std::cout << "TMAX = " << Parametrage::TEMPS_MAX <<std::endl ;
+    std::cout << std::endl;
+
+    while ((!getFileBureauTableDecharge().empty() || !getFileTableDechargeIsoloires().empty() || !getFileIsoloiresTableVote().empty() 
+        ||  !getTableVote().estVide() ||  !getTableDecharge().estVide()) || IsoloireVide == false || temps <= (int) Parametrage::TEMPS_MAX) {
+
+        if(temps == (int) Parametrage::TEMPS_MAX) {
+                std::cout << "\nFERMETURE ENTREE \n" << std::endl ;
+        }
+        // pour s'assurer de bien vider les isoloires
+        IsoloireVide = true ;
+        for (int i = 0 ; i< (int)Parametrage::NOMBRE_ISOLOIRS ; ++i) {
+            if (!getIsoloire(i).estVide()) {
+                IsoloireVide = false ;
+            }
+        }
+        traitement(temps,indiceElecteur);
+    }
+
+    std::cout << std::endl;
+    std::cout << "FERMETURE BUREAU n."<< getNumeroBureau()  << std::endl ;
+    std::cout << std::endl;
+    std::cout << "BUREAU n." << getNumeroBureau()  << " : RESULTATS " << getElection().getNom() << std::endl ;
+    std::cout << "PRESIDENT : " << getTableVote().getPresident().getNom() << " " << getTableVote().getPresident().getPrenom() << std::endl ;
+    std::cout << "  nb electeurs : " << getListeElectorale().getTailleListeElectorale() << std::endl ;
+    std::cout << "  nb votes : " << getTableVote().getUrneBulletins().size() << std::endl ;
+    std::cout << "  participation : " << (( (float)getTableVote().getUrneBulletins().size() /(float)getListeElectorale().getTailleListeElectorale()) ) *100 << "%" << std::endl;
+    std::cout << "  abstention : " << ( 1. -( (float)getTableVote().getUrneBulletins().size() /(float)getListeElectorale().getTailleListeElectorale()) ) *100 << "%" << std::endl;
+
+    // comme on va dépiler l'urne, on va perdre sa taille, donc on la stock
+    float nbrVotant = (float)getTableVote().getUrneBulletins().size() ;
+
+    // affichage des votes
+    std::map<int,VoteCandidat> comptage = tirageVotes();
+    for (const auto& k : comptage) {
+        const VoteCandidat& vote = k.second; // Valeur
+        float pourcentage = (float)vote.occurence / nbrVotant ;
+        std::cout << "  " << vote.candidat << " : " << vote.occurence << " (" << pourcentage * 100<< "%)" << std::endl;
+    }
 }
 
-    return comptage ;
-}
