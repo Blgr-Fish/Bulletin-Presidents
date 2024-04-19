@@ -257,6 +257,13 @@ void Bureau::traitement(int & temps, int & indiceElecteur) {
 
 
 void Bureau::simulation() {
+
+    // On ne fait pas de simulation sans isoloirs
+    if (Parametrage::NOMBRE_ISOLOIRS <= 0) {
+        std::cout << "Le bureau n." << getNumeroBureau() << " ne contient aucun isoloirs.\nFermeture du bureau." << std::endl ;
+        return ;
+    }
+
     int temps = 1 ;
     int indiceElecteur = 0 ;
     bool IsoloireVide = true ;
@@ -319,7 +326,10 @@ void Bureau::simulation() {
     std::map<int,VoteCandidat> comptage = tirageVotes();
     for (const auto& k : comptage) {
         const VoteCandidat& vote = k.second; // Valeur
-        float pourcentage = (float)vote.occurence / nbrVotant ;
+
+        // on laisse pourcentage à 0 si il n'y a aucun électeurs (sinon division par 0 qui donne de -nan%)
+        float pourcentage =  nbrVotant > 1 ? (float)vote.occurence / nbrVotant : 0;
+
         std::cout << "  " << vote.candidat << " : " << vote.occurence << " (" << pourcentage * 100<< "%)" << std::endl;
     }
 }

@@ -57,11 +57,12 @@ int main(void)
    //ElecteurEngage* ele = listeElectorale.rechercherElecteur(*listePersonne[0]);
 
    Bureau bureauDeVote(listeElecteur,electionCandidat,*listePersonne[2],258);
-   //Bureau bureauDeVote2(listeElecteur,electionCandidat,*listePersonne[3],512);
-
    bureauDeVote.simulation();
-   //bureauDeVote2.simulation();
 
+   // Pour ajouter plusieurs bureaux de vote, il suffit d'en instancier un nouveau et d'utiliser simulation()
+   //
+   //Bureau bureauDeVote2(listeElecteur,electionCandidat,*listePersonne[3],512);
+   //bureauDeVote2.simulation();
 
    // destruction des personnes
    for (Personne* psn : listePersonne)
