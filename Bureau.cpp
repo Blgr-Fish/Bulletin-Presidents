@@ -289,9 +289,6 @@ void Bureau::simulation() {
     while ((!getFileBureauTableDecharge().empty() || !getFileTableDechargeIsoloires().empty() || !getFileIsoloiresTableVote().empty() 
         ||  !getTableVote().estVide() ||  !getTableDecharge().estVide()) || IsoloireVide == false || temps <= (int) Parametrage::TEMPS_MAX) {
 
-        if(temps == (int) Parametrage::TEMPS_MAX) {
-                std::cout << "\nFERMETURE ENTREE \n" << std::endl ;
-        }
         // pour s'assurer de bien vider les isoloires
         IsoloireVide = true ;
         for (int i = 0 ; i< (int)Parametrage::NOMBRE_ISOLOIRS ; ++i) {
@@ -300,6 +297,9 @@ void Bureau::simulation() {
             }
         }
         traitement(temps,indiceElecteur);
+        if(temps == (int) Parametrage::TEMPS_MAX+1) {
+                std::cout << "\nFERMETURE ENTREE \n" << std::endl ;
+        }
     }
 
     std::cout << std::endl;

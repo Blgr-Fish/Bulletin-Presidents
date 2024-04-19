@@ -25,11 +25,11 @@ int main(void)
    // création des personnes
    std::vector<Personne*> listePersonne = {
       new Personne("A", "bic", 7),
-      new Personne("B", "gad", 9),
+      new Personne("B", "gad", 8),
       new Personne("C", "ann", 2),
       new Personne("D", "pol", 5),
       new Personne("E", "lam", 1),
-      new Personne("F", "bul", 10),
+      new Personne("F", "bul", 7),
       new Personne("G", "yap", 3),
       new Personne("X", "nel", 5),
       new Personne("Y", "rik", 2),

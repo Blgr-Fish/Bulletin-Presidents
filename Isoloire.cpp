@@ -61,7 +61,7 @@ void Isoloire::choisirBulletinFinal()
     std::uniform_int_distribution<size_t> BulletinBlancChance(0, 100);
     const double randValeur = (float)BulletinBlancChance(gen) / 100; // donne une val entre 0 et 1
 
-    if (randValeur <= probaNul)
+    if (randValeur <= probaNul || p_electeurOccupant->getBulletins().empty())
     {
         BulletinsCandiat bulletinF("Nul", -2, 1);
         p_electeurOccupant->prendreBulletinFinal(bulletinF);

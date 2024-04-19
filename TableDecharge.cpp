@@ -91,11 +91,9 @@ void TableDecharge::choisirBulletins()
             tempListeCandidats.push_back(bulletin);
         }
     }
-    // On prend par défaut un bulletin blanc si la liste est vide ou alors qu'il reste qu'un seul bulletin
     if (tempListeCandidats.size() < 2)
     {
-        p_electeurOccupant->prendreBulletin(p_tableHachageCandidatsDecharge[-1]);
-        p_tableHachageCandidatsDecharge[-1].nombreDeBulletins -= 1;
+        /* On prend rien si il y a moins de 2 bulletins */
     }
     else
     {
