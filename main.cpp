@@ -13,14 +13,10 @@
 using namespace std;
 using namespace elections;
 
-
-
 int main(void)
 {
    // initialisation du générateur de nombres aléatoires
    std::srand(std::time(nullptr));
-
-
 
    // création des personnes
    std::vector<Personne*> listePersonne = {
@@ -52,9 +48,6 @@ int main(void)
    electionCandidat.ajouterCandidat(listePersonne[6]);
    electionCandidat.ajouterCandidat(listePersonne[7]);
    electionCandidat.ajouterCandidat(listePersonne[8]);
-
-   
-   //ElecteurEngage* ele = listeElectorale.rechercherElecteur(*listePersonne[0]);
 
    Bureau bureauDeVote(listeElecteur,electionCandidat,*listePersonne[2],258);
    bureauDeVote.simulation();
