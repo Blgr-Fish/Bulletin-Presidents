@@ -1,3 +1,3 @@
-# PROJET-ASD2
+# Bulletin-Presidents
 
 Made in Université de Nantes (Licence 2)
